@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 20, 2017, 8:46:01 AM
+    Author     : User
+*/
+*{
+    font-family: sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu{
+    padding-left: 80px;
+    height: 50px;
+    background-color: #4A4A4A;
+    color: white;
+}
+
+.fr-menu-logo{
+    float:left;
+    position: fixed;
+    left: -5px;
+}
+
+.fr-menu{
+    float:left;
+    padding: 0px 45px 0px 5px;
+    width: 100px;
+    height: 47px;
+    line-height: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    font-style: normal;
+    text-align: center;
+    color: #FFF;
+    cursor: pointer;
+    padding-bottom: 3px;
+    bottom: 3px;
+}
+
+
+.fr-menu a{
+    color: #FFF;
+    text-decoration: none;
+}
+
+.fr-menu a:hover{
+    color: #faaf2a;
+}
+
+.fr-search{
+    float: right;
+    line-height: 50px;
+    margin-right: 100px;
+}
+
+input[type=search]{
+    width: 30px;
+    height: 30px;
+    border: none;
+    padding-left: 30px;
+    background: url(../img/searchIcon.png) #ededed no-repeat 0px center;
+    transition: all .5s
+}
+input[type=search]:focus{
+    padding-left: 35px;
+    width: 130px;
+}
+
+.searchLogo{
+    margin-top: 85%;
+}
+
+.copyRightFormat{
+    height: 30px;
+    margin-top: 5%;
+    background-color: #4A4A4A;
+    color: #FFF;
+    line-height: 190%;
+    text-align: center;
+}
+
+.copyRight{
+    border-bottom: solid 1px #777777;
+    font-size: 14px;
+}
