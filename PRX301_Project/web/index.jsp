@@ -10,16 +10,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cổng truyện dịch Paper</title>
-        <link href="../src/java/content/css/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="content/css/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="content/css/index.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <jsp:include page="header.html"/>
 
-        <div banner>
-            <img src="../src/java/content/img/default.jpg" alt=""/>
-                
+        <div class="banner">
+            <img src="content/img/default-banner.jpg" alt=""/>
         </div>
         
+        <div class="frame-link">
+            <img src="content/img/banner-link.png" alt=""/>
+        </div>
         <jsp:include page="footer.html"/>
     </body>
 </html>
