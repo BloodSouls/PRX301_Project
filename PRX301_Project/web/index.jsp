@@ -23,6 +23,20 @@
         <div class="frame-link">
             <img src="content/img/banner-link.png" alt=""/>
         </div>
+        
+        <div class="frame-list-update">
+            <div class="update-list">
+                <div class="update-item"></div>
+            </div>
+        </div>
+        <div class="frame-list-new">
+            
+            
+        </div>
+        <div class="frame-list-popular">
+            
+            
+        </div>
         <jsp:include page="footer.html"/>
     </body>
 </html>
