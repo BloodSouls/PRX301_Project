@@ -1,0 +1,97 @@
+form {
+  margin: 0px;
+}
+
+.page-background {
+  background-image: url(../img/loginPage-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-box {
+  width: 360px;
+  margin: 10% auto;
+}
+
+.login-box-header {
+  font-size: 36px;
+  color: #FAAF2A;
+  text-align: center;
+  margin-bottom: 25px
+}
+
+.login-box-body, .register-box-body {
+  padding: 20px;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  display: block;
+  color: #666;
+}
+
+.register-box-body {
+  display: none;
+}
+
+.login-box-msg, .register-box-msg {
+  padding: 0px 20px 20px;
+  text-align: center;
+}
+
+.my-input-wrapper {
+  border: 1px solid #d2d6de;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.my-input-wrapper input {
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  display: block;
+  /*padding: 5px 0px 5px 32px;*/
+  padding: 7px 45px 7px 10px;
+  color: #666;
+  /*background-color: inherit;*/
+}
+
+.my-input-wrapper .icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 25px;
+  height: 25px;
+}
+
+.my-input-wrapper .icon img {
+  width: 100%;
+  height: auto;
+  opacity: 0.8;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.btn {
+  color: white;
+  background-color: #3c8dbc;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 8px 24px;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.btn:hover {
+  background-color: #204d74;
+}
+
+.change-box-content {
+  color: #3d83ff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.change-box-content:hover {
+  color: #2567db;
+}
