@@ -19,23 +19,170 @@
         <div class="banner">
             <img src="content/img/default-banner.jpg" alt=""/>
         </div>
-        
+
         <div class="frame-link">
             <img src="content/img/banner-link.png" alt=""/>
-        </div>
-        
-        <div class="frame-list-update">
-            <div class="update-list">
-                <div class="update-item"></div>
+            <div class="logBtn">
+                <a href="" >ĐĂNG NHẬP / ĐĂNG KÝ</a>
+            </div>
+            <div class="searchBtn">
+                <a href="">DANH SÁCH / TÌM KIẾM</a>
             </div>
         </div>
-        <div class="frame-list-new">
-            
-            
-        </div>
-        <div class="frame-list-popular">
-            
-            
+        <div class="frame-container">
+            <div class="frame-list-update">
+                <div class="head">
+                    <div class="title">MỚI CẬP NHẬT</div>
+                    <div class="btnShowAll"><a href="">Xem tất cả</a></div>
+                </div>
+                <div class="description-head">Các bộ manga mới cập nhật tập mới</div>
+                <div class="update-list">
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <div>
+                            <span>Tên truyện</span>
+                        </div>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="seperate"></div>
+
+            <div class="frame-list-new">
+                <div class="head">
+                    <div class="title">MỚI RA MẮT</div>
+                    <div class="btnShowAll"><a href="">Xem tất cả</a></div>
+                </div>
+                <div class="description-head">Các bộ manga mới ra</div>
+                <div class="update-list">
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                </div>
+            </div>
+            <div class="seperate"></div>
+            <div class="frame-list-popular">
+                <div class="head">
+                    <div class="title">PHỔ BIẾN</div>
+                    <div class="btnShowAll"><a href="">Xem tất cả</a></div>
+                </div>
+                <div class="description-head">Các bộ manga được nhiều người xem</div>
+                <div class="update-list">
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                    <div class="update-item">
+                        <img src="content/img/default-banner.jpg"/>
+                        <span>Tên truyện</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <jsp:include page="footer.html"/>
     </body>
