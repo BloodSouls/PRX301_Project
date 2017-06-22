@@ -3,7 +3,7 @@ form {
 }
 
 .page-background {
-  background-image: url(../img/loginPage-background.jpg);
+  background-image: url(../img/background/loginPage-background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -48,10 +48,8 @@ form {
   border: none;
   font-size: 14px;
   display: block;
-  /*padding: 5px 0px 5px 32px;*/
   padding: 7px 45px 7px 10px;
   color: #666;
-  /*background-color: inherit;*/
 }
 
 .my-input-wrapper .icon {
