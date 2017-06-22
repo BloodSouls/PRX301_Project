@@ -127,7 +127,8 @@ and open the template in the editor.
 }
 
 .frame-list-update,
-.frame-list-new{
+.frame-list-new,
+.frame-list-popular{
     height: 600px;
 }
 
