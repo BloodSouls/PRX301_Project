@@ -37,17 +37,15 @@ and open the template in the editor.
     border-radius: 10px;
 }
 
-.searchBtn:hover{
+.searchBtn:hover {
     background-color: #F9F9F9;
+}
+
+.searchBtn:hover a {
     color: #82C242;
 }
 
-.searchBtn a:hover{
-    color: #82C242;
-}
-
-
-.searchBtn a{
+.searchBtn a {
     text-decoration: none;
     color: #F9F9F9;
     font-size: 21px;
@@ -70,12 +68,12 @@ and open the template in the editor.
 
 .logBtn:hover{
     background-color: #F9F9F9;
+}
+
+.logBtn:hover a{
     color: #FF9E4B;
 }
-.logBtn a:hover{
-    background-color: #F9F9F9;
-    color: #FF9E4B;
-}
+
 .logBtn a{
     text-decoration: none;
     color: #F9F9F9;
