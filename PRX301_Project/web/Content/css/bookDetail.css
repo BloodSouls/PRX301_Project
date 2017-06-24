@@ -112,6 +112,7 @@
 
 .manga-detail .content .info {
   font-size: 14px;
+  background-color: #f9f9f9;
 }
 
 .manga-detail .content .info ul {
@@ -154,6 +155,9 @@
   padding: 3px 0px;
   display: inline-block;
   width: 100%;
+}
+.manga-detail .content .volume-wrapper .chapters li:nth-child(odd) {
+  background-color: #f9f9f9;
 }
 .manga-detail .content .volume-wrapper .chapters li .link {
   max-width: 580px;
