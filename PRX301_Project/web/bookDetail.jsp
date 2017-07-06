@@ -9,20 +9,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-Type" content="text/html; charset=UTF-8">
     <title>Cổng truyện dịch Paper</title>
-    <link href="Content/css/layout.css" rel="stylesheet" type="text/css"/>
-    <link href="Content/css/bookDetail.css" rel="stylesheet" type="text/css"/>
-    <script src="Content/js/rating.js" type="text/javascript"></script>
+    <link href="content/css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="content/css/bookDetail.css" rel="stylesheet" type="text/css"/>
+    <script src="content/js/rating.js" type="text/javascript"></script>
   </head>
   <body>
     <c:import url="header.html" charEncoding="UTF-8" />
 
     <div class="banner" style="background-image: 
          linear-gradient(to right, rgba(35, 35, 35, 0.5), rgba(35, 35, 35, 0.5)), 
-         url(Content/img/background/dango.jpg);">
+         url(content/img/background/dango.jpg);">
       <div class="body">
-        <div class="manga-img" style="background-image: url(Content/img/banner-link.png)">
+        <div class="manga-img" style="background-image: url(content/img/banner-link.png)">
         </div>
         <div class="banner-info">
           <p class="title">
@@ -46,7 +46,7 @@
           </li>
         </ul>
         <a class="btn-bookmark">
-          <img class="medium-icon" src="Content/img/icon/white_heart_icon.png" />
+          <img class="medium-icon" src="content/img/icon/white_heart_icon.png" />
           Theo dõi
         </a>
       </div>
@@ -190,15 +190,15 @@
               <li>
                 <div class="rating-star" onmousemove="chooseRating(event)" 
                      onmouseout="reloadRating()" onclick="setRating()">
-                  <img id="star1" class="star" src="Content/img/icon/full-star.png"
+                  <img id="star1" class="star" src="content/img/icon/full-star.png"
                        title="Không hay" />
-                  <img id="star2" class="star" src="Content/img/icon/full-star.png"
+                  <img id="star2" class="star" src="content/img/icon/full-star.png"
                        title="Tạm được" />
-                  <img id="star3" class="star" src="Content/img/icon/full-star.png"
+                  <img id="star3" class="star" src="content/img/icon/full-star.png"
                        title="Trung bình" />
-                  <img id="star4" class="star" src="Content/img/icon/full-star.png"
+                  <img id="star4" class="star" src="content/img/icon/full-star.png"
                        title="Hay" />
-                  <img id="star5" class="star" src="Content/img/icon/half-star.png"
+                  <img id="star5" class="star" src="content/img/icon/half-star.png"
                        title="Rất hay" />
                   <input id="rating-value" type="hidden" value="4.5" />
                 </div>

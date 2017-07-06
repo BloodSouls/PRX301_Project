@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 1, 2017, 9:21:18 AM
+    Author     : User
+*/
+
+div.tab {
+    overflow: hidden;
+    margin: 0% 0% 1% 15%;
+}
+
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 19px;
+}
+
+div.tab button:hover {
+    color: #a2a2a2;
+}
+
+div.tab button.active {
+    /*background-color: #ccc;*/
+    color: #faaf2a;
+    border-bottom: 2px solid #fc2;
+
+}
+
+.tabcontent {
+    display: none;
+    margin-left: 16%;
+    border-top: none;
+}
+
+.profile-title{
+    background: url(../img/default-banner.jpg);
+    height: 115px;
+}
+
+.profile-title span{
+    margin-left: 16%;
+    color: white;
+    font-size: 41px;
+    font-weight: 600;
+    line-height: 111px;
+}
+
+.container-show-list{
+    margin-top: 2%;
+
+}
+
+.header-show-list{
+    background-color: #F9F9F9;
+    margin-right: 10%;
+    padding: 7px;
+    line-height: 20px;
+    border-radius: 4px;
+    height: 20px;
+
+}
+
+.format-show-list{
+    float: left;
+    width: 335px;
+    margin-bottom: 2%;
+}
+
+.format-show-list a{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+
+.clear{
+    clear: both;
+}
+
+.content-list{
+    margin-left: 5px;
+}

@@ -11,8 +11,8 @@
     <head>
         <meta http-equiv="content-Type" content="text/html; charset=UTF-8">
         <title>Cổng truyện dịch Paper</title>
-        <link href="Content/css/layout.css" rel="stylesheet" type="text/css"/>
-        <link href="Content/css/search.css" rel="stylesheet" type="text/css"/>
+        <link href="content/css/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="content/css/search.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <c:import url="header.html" charEncoding="UTF-8" />
@@ -34,45 +34,45 @@
                 <div class="description-head">Các bộ manga mới cập nhật tập mới</div>
                 <div class="update-list">
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <div>
                             <span>Tên truyện</span>
                         </div>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                     <div class="update-item">
-                        <img src="Content/img/default-banner.jpg"/>
+                        <img src="content/img/default-banner.jpg"/>
                         <span>Tên truyện</span>
                     </div>
                 </div>
@@ -84,43 +84,43 @@
                             <div class="description-head">Các bộ manga mới ra</div>
                             <div class="update-list">
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                             </div>
@@ -132,43 +132,43 @@
                             <div class="description-head">Các bộ manga được nhiều người xem</div>
                             <div class="update-list">
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                                 <div class="update-item">
-                                    <img src="Content/img/default-banner.jpg"/>
+                                    <img src="content/img/default-banner.jpg"/>
                                     <span>Tên truyện</span>
                                 </div>
                             </div>
