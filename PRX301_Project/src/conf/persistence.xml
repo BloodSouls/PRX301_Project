@@ -6,7 +6,6 @@
     <class>entities.Bookmark</class>
     <class>entities.BookGenreMapping</class>
     <class>entities.Genre</class>
-    <class>entities.Volume</class>
     <class>entities.Rating</class>
     <class>entities.Chapter</class>
     <class>entities.User</class>
