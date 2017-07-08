@@ -36,6 +36,14 @@ public class CrawlData {
   public CrawlData() {
     this.list = new ArrayList<>();
   }
+
+  public List<Book> getList() {
+    return list;
+  }
+
+  public void setList(List<Book> list) {
+    this.list = list;
+  }
   
   public void crawl(int startPageNumber, int endPageNumber) {
     if (startPageNumber <= 0 || endPageNumber <= 0 || endPageNumber > startPageNumber) {
@@ -62,7 +70,7 @@ public class CrawlData {
   }
   
   public void displayList() {
-    if (!list.isEmpty()) {
+    if (list.isEmpty()) {
       System.out.println("List is empty");
       return;
     }

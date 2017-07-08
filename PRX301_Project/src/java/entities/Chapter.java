@@ -73,7 +73,7 @@ public class Chapter implements Serializable {
   private Book bookId;
   
   private String chapterUrl;
-  
+
   public Chapter() {
   }
 
@@ -126,14 +126,6 @@ public class Chapter implements Serializable {
   public void setReleasedDate(Date releasedDate) {
     this.releasedDate = releasedDate;
   }
-  
-  public String getChapterUrl() {
-    return chapterUrl;
-  }
-
-  public void setChapterUrl(String chapterUrl) {
-    this.chapterUrl = chapterUrl;
-  }
 
   @XmlTransient
   public List<ChapterPage> getChapterPageList() {
@@ -150,6 +142,14 @@ public class Chapter implements Serializable {
 
   public void setBookId(Book bookId) {
     this.bookId = bookId;
+  }
+  
+  public String getChapterUrl() {
+    return chapterUrl;
+  }
+
+  public void setChapterUrl(String chapterUrl) {
+    this.chapterUrl = chapterUrl;
   }
 
   @Override

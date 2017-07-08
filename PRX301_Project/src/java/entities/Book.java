@@ -103,7 +103,7 @@ public class Book implements Serializable {
   private List<BookAuthorMapping> bookAuthorMappingList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
   private List<BookGenreMapping> bookGenreMappingList;
-  
+
   private String bookDetailUrl;
   private List<String> genreList;
   private List<String> authorList;
