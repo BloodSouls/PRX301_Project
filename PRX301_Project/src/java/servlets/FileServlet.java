@@ -5,8 +5,12 @@
  */
 package servlets;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.URLDecoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author USER
  */
-public class MainPageServlet extends HttpServlet {
+public class FileServlet extends HttpServlet {
+
+  private final int DEFAULT_BUFFER_SIZE = 10240;
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,12 +36,46 @@ public class MainPageServlet extends HttpServlet {
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
+    
+    String requestedFile = request.getPathInfo();
+    if (requestedFile == null) {
+      response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
+      return;
+    }
+
+    String filePath = getServletConfig().getInitParameter("filePath");
+    File file = new File(filePath, URLDecoder.decode(requestedFile, "UTF-8"));
+    if (!file.exists()) {
+      response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
+      return;
+    }
+
+    String contentType = getServletContext().getMimeType(file.getName());
+    if (contentType == null) {
+      contentType = "application/octet-stream";
+    }
+
+    response.reset();
+    response.setBufferSize(DEFAULT_BUFFER_SIZE);
+    response.setContentType(contentType);
+    response.setHeader("Content-Length", String.valueOf(file.length()));
+    response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+
+    BufferedInputStream input = null;
+    BufferedOutputStream output = null;
+
     try {
-      out.println("MainPage");
-      
+      input = new BufferedInputStream(new FileInputStream(file), DEFAULT_BUFFER_SIZE);
+      output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
+
+      byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+      int length;
+      while ((length = input.read(buffer)) > 0) {
+        output.write(buffer, 0, length);
+      }
     } finally {
-      out.close();
+      input.close();
+      output.close();
     }
   }
 

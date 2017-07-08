@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author USER
  */
 @Entity
-@Table(name = "User")
+@Table(name = "[User]")
 @XmlRootElement
 @NamedQueries({
   @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
@@ -45,30 +49,39 @@ public class User implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
   @Basic(optional = false)
+  @NotNull
   @Column(name = "Id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 50)
   @Column(name = "Username")
   private String username;
   @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 50)
   @Column(name = "Password")
   private String password;
   @Column(name = "DateOfBirth")
   @Temporal(TemporalType.TIMESTAMP)
   private Date dateOfBirth;
+  // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+  @Size(max = 50)
   @Column(name = "Email")
   private String email;
   @Column(name = "Gender")
   private Boolean gender;
   @Basic(optional = false)
+  @NotNull
   @Column(name = "RoleType")
   private int roleType;
+  @Size(max = 50)
   @Column(name = "Address")
   private String address;
+  @Size(max = 255)
   @Column(name = "ImageUrl")
   private String imageUrl;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-  private List<Comment> commentList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
   private List<Bookmark> bookmarkList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
@@ -158,15 +171,6 @@ public class User implements Serializable {
 
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
-  }
-
-  @XmlTransient
-  public List<Comment> getCommentList() {
-    return commentList;
-  }
-
-  public void setCommentList(List<Comment> commentList) {
-    this.commentList = commentList;
   }
 
   @XmlTransient

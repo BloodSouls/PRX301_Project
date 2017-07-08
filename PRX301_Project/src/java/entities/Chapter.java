@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
   @NamedQuery(name = "Chapter.findAll", query = "SELECT c FROM Chapter c"),
   @NamedQuery(name = "Chapter.findById", query = "SELECT c FROM Chapter c WHERE c.id = :id"),
-  @NamedQuery(name = "Chapter.findByVolumeId", query = "SELECT c FROM Chapter c WHERE c.volumeId = :volumeId"),
   @NamedQuery(name = "Chapter.findByName", query = "SELECT c FROM Chapter c WHERE c.name = :name"),
   @NamedQuery(name = "Chapter.findByNumber", query = "SELECT c FROM Chapter c WHERE c.number = :number"),
   @NamedQuery(name = "Chapter.findByDescription", query = "SELECT c FROM Chapter c WHERE c.description = :description"),
@@ -44,30 +47,32 @@ public class Chapter implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
   @Basic(optional = false)
+  @NotNull
   @Column(name = "Id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @Basic(optional = false)
-  @Column(name = "VolumeId")
-  private int volumeId;
-  @Basic(optional = false)
+  @Size(max = 50)
   @Column(name = "Name")
   private String name;
   @Basic(optional = false)
+  @NotNull
   @Column(name = "Number")
   private double number;
+  @Size(max = 1073741823)
   @Column(name = "Description")
   private String description;
   @Basic(optional = false)
+  @NotNull
   @Column(name = "ReleasedDate")
   @Temporal(TemporalType.TIMESTAMP)
   private Date releasedDate;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "chapterId")
-  private List<Comment> commentList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "chapterId")
   private List<ChapterPage> chapterPageList;
   @JoinColumn(name = "BookId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
   private Book bookId;
+  
+  private String chapterUrl;
 
   public Chapter() {
   }
@@ -76,10 +81,8 @@ public class Chapter implements Serializable {
     this.id = id;
   }
 
-  public Chapter(Integer id, int volumeId, String name, double number, Date releasedDate) {
+  public Chapter(Integer id, double number, Date releasedDate) {
     this.id = id;
-    this.volumeId = volumeId;
-    this.name = name;
     this.number = number;
     this.releasedDate = releasedDate;
   }
@@ -90,14 +93,6 @@ public class Chapter implements Serializable {
 
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public int getVolumeId() {
-    return volumeId;
-  }
-
-  public void setVolumeId(int volumeId) {
-    this.volumeId = volumeId;
   }
 
   public String getName() {
@@ -133,15 +128,6 @@ public class Chapter implements Serializable {
   }
 
   @XmlTransient
-  public List<Comment> getCommentList() {
-    return commentList;
-  }
-
-  public void setCommentList(List<Comment> commentList) {
-    this.commentList = commentList;
-  }
-
-  @XmlTransient
   public List<ChapterPage> getChapterPageList() {
     return chapterPageList;
   }
@@ -156,6 +142,14 @@ public class Chapter implements Serializable {
 
   public void setBookId(Book bookId) {
     this.bookId = bookId;
+  }
+  
+  public String getChapterUrl() {
+    return chapterUrl;
+  }
+
+  public void setChapterUrl(String chapterUrl) {
+    this.chapterUrl = chapterUrl;
   }
 
   @Override

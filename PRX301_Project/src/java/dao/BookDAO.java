@@ -8,59 +8,86 @@ import javax.persistence.TypedQuery;
 import ultis.Ultilities;
 
 public class BookDAO {
-  
+
   public static Book getBook(int bookId) {
+    EntityManager em = Ultilities.getEntityManager();
     Book book = null;
+
     try {
-      EntityManager em = Ultilities.getEntityManager();
       TypedQuery<Book> query = em.createNamedQuery("Book.findById", Book.class);
       query.setParameter("id", bookId);
       book = query.getSingleResult();
-      em.close();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      em.close();
     }
-    
+
     return book;
   }
 
-  public static List<Book> getTop10MostViewedBook() {
-    List<Book> result = null;
+  public static boolean createBook(Book book) {
+    EntityManager em = Ultilities.getEntityManager();
+    boolean result = false;
+
     try {
-      EntityManager em = Ultilities.getEntityManager();
+      em.getTransaction().begin();
+      em.persist(book);
+      em.flush();
+      em.getTransaction().commit();
+
+      result = true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      em.close();
+    }
+
+    return result;
+  }
+
+  public static List<Book> getTop10MostViewedBook() {
+    EntityManager em = Ultilities.getEntityManager();
+    List<Book> result = null;
+
+    try {
       TypedQuery<Book> query = em.createQuery(
               "SELECT b FROM Book b ORDER BY b.totalView DESC", Book.class)
               .setMaxResults(10);
       result = query.getResultList();
-      em.close();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      em.close();
     }
 
     return result;
   }
 
   public static List<Book> get10NewBook() {
+    EntityManager em = Ultilities.getEntityManager();
     List<Book> result = null;
+
     try {
-      EntityManager em = Ultilities.getEntityManager();
       TypedQuery<Book> query = em.createQuery(
               "SELECT b FROM Book b ORDER BY b.creatingDate DESC", Book.class)
               .setMaxResults(10);
 
       result = query.getResultList();
-      em.close();
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      em.close();
     }
 
     return result;
   }
 
   public static List<Book> get10UpdatedBook() {
+    EntityManager em = Ultilities.getEntityManager();
     List<Book> result = null;
+
     try {
-      EntityManager em = Ultilities.getEntityManager();
 
       TypedQuery<Object[]> query = em.createQuery(
               "SELECT DISTINCT c.bookId, MAX(c.releasedDate)"
@@ -74,10 +101,11 @@ public class BookDAO {
       for (Object[] obj : list) {
         result.add((Book) obj[0]);
       }
-      
-      em.close();
+
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      em.close();
     }
 
     return result;
