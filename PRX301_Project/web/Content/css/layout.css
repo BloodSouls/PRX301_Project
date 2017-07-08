@@ -77,12 +77,14 @@ input[type=search]:focus{
 
 .copyRightFormat{
     height: 30px;
-    margin-top: 5%;
     background-color: #4A4A4A;
     color: #FFF;
     line-height: 190%;
     text-align: center;
+    position: relative;
+    padding: 7px;
 }
+
 
 .copyRight{
     border-bottom: solid 1px #777777;
