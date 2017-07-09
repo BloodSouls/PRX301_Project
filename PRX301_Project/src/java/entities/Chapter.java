@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -24,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,7 +53,7 @@ public class Chapter implements Serializable {
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @Size(max = 50)
+  @Size(max = 200)
   @Column(name = "Name")
   private String name;
   @Basic(optional = false)
@@ -72,6 +74,8 @@ public class Chapter implements Serializable {
   @ManyToOne(optional = false)
   private Book bookId;
   
+  @Transient
+  @XmlTransient
   private String chapterUrl;
 
   public Chapter() {
@@ -134,6 +138,14 @@ public class Chapter implements Serializable {
 
   public void setChapterPageList(List<ChapterPage> chapterPageList) {
     this.chapterPageList = chapterPageList;
+  }
+  
+  public void addChapterPage(ChapterPage chapterPage) {
+    if (this.chapterPageList == null) {
+      this.chapterPageList = new ArrayList<>();
+    }
+    chapterPage.setChapterId(this);
+    this.chapterPageList.add(chapterPage);
   }
 
   public Book getBookId() {

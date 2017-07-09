@@ -7,6 +7,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -22,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
   @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
   @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :id"),
-  @NamedQuery(name = "Book.findByAuthorId", query = "SELECT b FROM Book b WHERE b.authorId = :authorId"),
   @NamedQuery(name = "Book.findByName", query = "SELECT b FROM Book b WHERE b.name = :name"),
   @NamedQuery(name = "Book.findByAnotherName", query = "SELECT b FROM Book b WHERE b.anotherName = :anotherName"),
   @NamedQuery(name = "Book.findByReleasedDate", query = "SELECT b FROM Book b WHERE b.releasedDate = :releasedDate"),
@@ -56,14 +57,12 @@ public class Book implements Serializable {
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  @Column(name = "AuthorId")
-  private Integer authorId;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 50)
+  @Size(min = 1, max = 200)
   @Column(name = "Name")
   private String name;
-  @Size(max = 50)
+  @Size(max = 500)
   @Column(name = "AnotherName")
   private String anotherName;
   @Column(name = "ReleasedDate")
@@ -103,9 +102,15 @@ public class Book implements Serializable {
   private List<BookAuthorMapping> bookAuthorMappingList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
   private List<BookGenreMapping> bookGenreMappingList;
-
+  
+  @Transient
+  @XmlTransient
   private String bookDetailUrl;
+  @Transient
+  @XmlTransient
   private List<String> genreList;
+  @Transient
+  @XmlTransient
   private List<String> authorList;
   
   public Book() {
@@ -129,14 +134,6 @@ public class Book implements Serializable {
 
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public Integer getAuthorId() {
-    return authorId;
-  }
-
-  public void setAuthorId(Integer authorId) {
-    this.authorId = authorId;
   }
 
   public String getName() {
@@ -211,11 +208,11 @@ public class Book implements Serializable {
     this.status = status;
   }
 
-  public Boolean getIsActive() {
+  public Boolean getActive() {
     return isActive;
   }
 
-  public void setIsActive(Boolean isActive) {
+  public void setActive(Boolean isActive) {
     this.isActive = isActive;
   }
   
@@ -269,6 +266,14 @@ public class Book implements Serializable {
   public void setChapterList(List<Chapter> chapterList) {
     this.chapterList = chapterList;
   }
+  
+  public void addChapter(Chapter chapter) {
+    if (this.chapterList == null) {
+      this.chapterList = new ArrayList<>();
+    }
+    chapter.setBookId(this);
+    this.chapterList.add(chapter);
+  }
 
   @XmlTransient
   public List<BookAuthorMapping> getBookAuthorMappingList() {
@@ -278,6 +283,14 @@ public class Book implements Serializable {
   public void setBookAuthorMappingList(List<BookAuthorMapping> bookAuthorMappingList) {
     this.bookAuthorMappingList = bookAuthorMappingList;
   }
+  
+  public void addBookAuthorMapping(BookAuthorMapping mapping) {
+    if (this.bookAuthorMappingList == null) {
+      this.bookAuthorMappingList = new ArrayList<>();
+    }
+    mapping.setBookId(this);
+    this.bookAuthorMappingList.add(mapping);
+  }
 
   @XmlTransient
   public List<BookGenreMapping> getBookGenreMappingList() {
@@ -286,6 +299,14 @@ public class Book implements Serializable {
 
   public void setBookGenreMappingList(List<BookGenreMapping> bookGenreMappingList) {
     this.bookGenreMappingList = bookGenreMappingList;
+  }
+  
+  public void addBookGenreMapping(BookGenreMapping mapping) {
+    if (this.bookGenreMappingList == null) {
+      this.bookGenreMappingList = new ArrayList<>();
+    }
+    mapping.setBookId(this);
+    this.bookGenreMappingList.add(mapping);
   }
 
   @Override

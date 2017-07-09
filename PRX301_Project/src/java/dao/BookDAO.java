@@ -26,9 +26,8 @@ public class BookDAO {
     return book;
   }
 
-  public static boolean createBook(Book book) {
+  public static int createBook(Book book) {
     EntityManager em = Ultilities.getEntityManager();
-    boolean result = false;
 
     try {
       em.getTransaction().begin();
@@ -36,14 +35,13 @@ public class BookDAO {
       em.flush();
       em.getTransaction().commit();
 
-      result = true;
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
       em.close();
     }
 
-    return result;
+    return book.getId();
   }
 
   public static List<Book> getTop10MostViewedBook() {

@@ -24,9 +24,8 @@ public class UserDAO {
     return user;
   }
   
-  public static boolean createUser(User user) {
+  public static int createUser(User user) {
     EntityManager em = Ultilities.getEntityManager();
-    boolean result = false;
     
     try {
       em.getTransaction().begin();
@@ -34,14 +33,13 @@ public class UserDAO {
       em.flush();
       em.getTransaction().commit();
       
-      result = true;
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
       em.close();
     }
     
-    return result;
+    return user.getId();
   }
 
   public static User login(String username, String password) {

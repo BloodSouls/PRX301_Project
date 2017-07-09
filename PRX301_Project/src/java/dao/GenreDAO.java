@@ -31,10 +31,10 @@ public class GenreDAO {
     Genre genre = null;
     
     try {
-      TypedQuery<Genre> query = em.createQuery(
-              "SELECT g FROM Genre g WHERE g.name LIKE :name",
-              Genre.class);
-      query.setParameter("name", "%" + name + "%");
+      TypedQuery<Genre> query = em.createNamedQuery(
+              "Genre.findByName",
+              Genre.class).setMaxResults(1);
+      query.setParameter("name", name);
       
       genre = query.getSingleResult();
     } catch (Exception e) {
@@ -46,9 +46,8 @@ public class GenreDAO {
     return genre;
   }
   
-  public static boolean createGenre(Genre genre) {
+  public static int createGenre(Genre genre) {
     EntityManager em = Ultilities.getEntityManager();
-    boolean result = false;
     
     try {
       em.getTransaction().begin();
@@ -56,14 +55,13 @@ public class GenreDAO {
       em.flush();
       em.getTransaction().commit();
       
-      result = true;
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
       em.close();
     }
    
-    return result;
+    return genre.getId();
   }
   
 }

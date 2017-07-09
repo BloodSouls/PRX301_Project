@@ -33,7 +33,7 @@ public class MainPageServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     try {
       out.println("MainPage");
-      
+
     } finally {
       out.close();
     }

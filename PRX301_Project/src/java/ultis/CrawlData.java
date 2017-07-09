@@ -30,9 +30,10 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 public class CrawlData {
+
   private final String uri = "http://truyen.vnsharing.site/index/KhamPha/newest/";
   private List<Book> list;
-  
+
   public CrawlData() {
     this.list = new ArrayList<>();
   }
@@ -44,37 +45,41 @@ public class CrawlData {
   public void setList(List<Book> list) {
     this.list = list;
   }
-  
+
   public void crawl(int startPageNumber, int endPageNumber) {
-    if (startPageNumber <= 0 || endPageNumber <= 0 || endPageNumber > startPageNumber) {
-      return;
-    }
-    list.clear();
-    
-    while (true) {
-      List<Book> result = getBookListFromHtml(uri + startPageNumber);
-      list.addAll(result);
-      if (startPageNumber == endPageNumber || result.isEmpty()) {
-        break;
+    try {
+      if (startPageNumber <= 0 || endPageNumber <= 0 || endPageNumber < startPageNumber) {
+        return;
       }
-      ++startPageNumber;
-    }
-    for (Book book : list) {
-      getBookDetailFromHtml(book.getBookDetailUrl(), book);
-      if (book.getChapterList() != null) {
-        for (Chapter chapter : book.getChapterList()) {
-          getChapterPageFromHtml(chapter.getChapterUrl(), chapter);
+      list.clear();
+
+      while (true) {
+        List<Book> result = getBookListFromHtml(uri + startPageNumber);
+        list.addAll(result);
+        if (startPageNumber == endPageNumber || result.isEmpty()) {
+          break;
+        }
+        ++startPageNumber;
+      }
+      for (Book book : list) {
+        getBookDetailFromHtml(book.getBookDetailUrl(), book);
+        if (book.getChapterList() != null) {
+          for (Chapter chapter : book.getChapterList()) {
+            getChapterPageFromHtml(chapter.getChapterUrl(), chapter);
+          }
         }
       }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
-  
+
   public void displayList() {
     if (list.isEmpty()) {
       System.out.println("List is empty");
       return;
     }
-    
+
     int count = 1;
     for (Book book : list) {
       System.out.println("Book " + count);
@@ -402,10 +407,7 @@ public class CrawlData {
             }
 
             if (attrClass != null && attrClass.getValue().equals("browse_result_item")) {
-              if (book.getChapterList() == null) {
-                book.setChapterList(new ArrayList<Chapter>());
-              }
-              book.getChapterList().add(new Chapter());
+              book.addChapter(new Chapter());
               inChapterChild = true;
             }
           } // end li ele
@@ -432,8 +434,6 @@ public class CrawlData {
                 Attribute attrTitle = ele.getAttributeByName(new QName("title"));
                 if (attrTitle != null) {
                   String content = attrTitle.getValue().trim();
-//                  System.out.println(uri);
-//                  System.out.println(content);
                   if (content.contains(book.getName())) {
                     content = content.substring(book.getName().length()).trim();
                     if (content.matches(".*\\d+.*")) { // Nếu không phải là chuỗi số
@@ -557,10 +557,12 @@ public class CrawlData {
               }
               inAnotherName = false;
             } else if (inAuthor) {
-              List<String> authorList;
+              List<String> authorList = null;
               if (content.contains("|")) {
                 authorList = splitString(content, "\\|");
-              } else {
+              } else if (content.contains(",")) {
+                authorList = splitString(content, ",");
+              } else if (!content.isEmpty()) {
                 authorList = new ArrayList<String>();
                 authorList.add(content);
               }
@@ -651,9 +653,6 @@ public class CrawlData {
 
   private void getChapterPageFromHtml(String uri, Chapter chapter) {
     System.out.println(uri);
-    if (chapter.getChapterPageList() == null) {
-      chapter.setChapterPageList(new ArrayList<ChapterPage>());
-    }
 
     BufferedReader in = getBufferedReaderFromHtml(uri);
 
@@ -700,7 +699,7 @@ public class CrawlData {
               if (attrId != null) {
                 ChapterPage page = new ChapterPage();
                 page.setPageNumber(Integer.parseInt(attrId.getValue()));
-                chapter.getChapterPageList().add(page);
+                chapter.addChapterPage(page);
               }
               inMangaImage = true;
             }
@@ -806,7 +805,7 @@ public class CrawlData {
 
     return result;
   }
-  
+
   private List<String> splitString(String content, String s) {
     List<String> result = new ArrayList<>();
     String[] data = content.split(s);

@@ -47,9 +47,8 @@ public class ChapterPageDAO {
     return result;
   }
 
-  public static boolean createChapterPage(ChapterPage cp) {
+  public static int createChapterPage(ChapterPage cp) {
     EntityManager em = Ultilities.getEntityManager();
-    boolean result = false;
 
     try {
       em.getTransaction().begin();
@@ -57,14 +56,13 @@ public class ChapterPageDAO {
       em.flush();
       em.getTransaction().commit();
       
-      result = true;
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
       em.close();
     }
 
-    return result;
+    return cp.getId();
   }
 
 }

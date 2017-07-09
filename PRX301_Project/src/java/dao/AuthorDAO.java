@@ -12,7 +12,8 @@ public class AuthorDAO {
     Author author = null;
 
     try {
-      TypedQuery<Author> query = em.createNamedQuery("Arthor.findById", Author.class);
+      TypedQuery<Author> query = em.createNamedQuery("Author.findById", Author.class);
+      query.setParameter("id", id);
       author = query.getSingleResult();
       
     } catch (Exception e) {
@@ -24,9 +25,8 @@ public class AuthorDAO {
     return author;
   }
 
-  public static boolean createAuthor(Author author) {
+  public static int createAuthor(Author author) {
     EntityManager em = Ultilities.getEntityManager();
-    boolean result = false;
 
     try {
       em.getTransaction().begin();
@@ -34,14 +34,33 @@ public class AuthorDAO {
       em.flush();
       em.getTransaction().commit();
 
-      result = true;
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
       em.close();
     }
 
-    return result;
+    return author.getId();
+  }
+  
+  public static Author findAuthorByName(String name) {
+    EntityManager em = Ultilities.getEntityManager();
+    Author author = null;
+    
+    try {
+      TypedQuery<Author> query = em.createNamedQuery(
+              "Author.findByName",
+              Author.class).setMaxResults(1);
+      query.setParameter("name", name);
+      
+      author = query.getSingleResult();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      em.close();
+    }
+    
+    return author;
   }
 
 }

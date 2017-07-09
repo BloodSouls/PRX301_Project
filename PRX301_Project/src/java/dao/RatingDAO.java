@@ -49,10 +49,10 @@ public class RatingDAO {
     return result;
   }
   
-  public static boolean createRating(Rating rating) {
-    boolean result = false;
-    
-    return result; 
-  }
+//  public static boolean createRating(Rating rating) {
+//    boolean result = false;
+//    
+//    return result; 
+//  }
   
 }

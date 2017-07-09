@@ -45,9 +45,8 @@ public class ChapterDAO {
     return result;
   }
   
-  public static boolean createChapter(Chapter c) {
+  public static int createChapter(Chapter c) {
     EntityManager em = Ultilities.getEntityManager();
-    boolean result = false;
     
     try {
       em.getTransaction().begin();
@@ -55,14 +54,13 @@ public class ChapterDAO {
       em.flush();
       em.getTransaction().commit();
       
-      result = true;
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
       em.close();
     }
     
-    return result;
+    return c.getId();
   }
   
 }
