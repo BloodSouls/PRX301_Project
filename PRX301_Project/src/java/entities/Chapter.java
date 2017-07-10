@@ -28,8 +28,12 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -38,6 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Chapter")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "chapter", propOrder = {"id", "bookId", "name", "number", "releasedDate"})
 @NamedQueries({
   @NamedQuery(name = "Chapter.findAll", query = "SELECT c FROM Chapter c"),
   @NamedQuery(name = "Chapter.findById", query = "SELECT c FROM Chapter c WHERE c.id = :id"),
@@ -52,26 +58,33 @@ public class Chapter implements Serializable {
   @NotNull
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @XmlElement(required = true)
   private Integer id;
   @Size(max = 200)
   @Column(name = "Name")
+  @XmlElement(required = true)
   private String name;
   @Basic(optional = false)
   @NotNull
   @Column(name = "Number")
+  @XmlElement(required = true)
   private double number;
   @Size(max = 1073741823)
   @Column(name = "Description")
+  @XmlElement(required = true)
   private String description;
   @Basic(optional = false)
   @NotNull
   @Column(name = "ReleasedDate")
   @Temporal(TemporalType.TIMESTAMP)
+  @XmlElement(required = true)
   private Date releasedDate;
+  @XmlTransient
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "chapterId")
   private List<ChapterPage> chapterPageList;
   @JoinColumn(name = "BookId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private Book bookId;
   
   @Transient

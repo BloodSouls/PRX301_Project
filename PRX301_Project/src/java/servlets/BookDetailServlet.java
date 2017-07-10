@@ -3,27 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package servlets;
 
+import dao.BookDAO;
+import dao.ChapterDAO;
+import entities.Book;
+import entities.Chapter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ultis.Ultilities;
+import ultis.Enums;
 
 /**
  *
  * @author USER
  */
-public class DispatchServlet extends HttpServlet {
-
-  private final String mainPageServlet = "MainPageServlet";
-  private final String bookDetailServlet = "BookDetailServlet";
-  private final String chapterDetailServlet = "ChapterDetailServlet";
-
+public class BookDetailServlet extends HttpServlet {
+  private final String bookDetailPage = "bookDetail.jsp";
+  
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
    * methods.
@@ -37,30 +40,23 @@ public class DispatchServlet extends HttpServlet {
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-
-    String action = request.getParameter("btnAction");
-    String url = "";
     
-//    Ultilities.crawlAndSaveDataToDB(1, 1);
+    String url = bookDetailPage;
+    String strBookId = request.getParameter("bookId");
     
     try {
-      if (action == null) {
-        url = mainPageServlet;
-      } else if (action.equals("Đăng Nhập")) {
-
-      } else if (action.equals("Đăng ký")) {
-
-      } else if (action.equals("viewBook")) {
-        url = bookDetailServlet;
-      } else if (action.equals("viewChapter")) {
-        url = chapterDetailServlet;
+      if (strBookId.matches("\\d+")) {
+        int bookId = Integer.parseInt(strBookId);
+        Book book = BookDAO.getBook(bookId);
+        
+        request.setAttribute("BOOK", book);
+        request.setAttribute("BOOKSTATUS", Enums.BookStatus.values());
       }
     } finally {
       RequestDispatcher rd = request.getRequestDispatcher(url);
       rd.forward(request, response);
       out.close();
     }
-
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

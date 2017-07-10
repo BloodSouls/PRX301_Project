@@ -6,6 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="book" value="${ requestScope.BOOK }" />
+<c:set var="bookStatusList" value="${ requestScope.BOOKSTATUS }"  />
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,35 +20,60 @@
     <link href="content/css/layout.css" rel="stylesheet" type="text/css"/>
     <link href="content/css/bookDetail.css" rel="stylesheet" type="text/css"/>
     <script src="content/js/rating.js" type="text/javascript"></script>
+    <style>
+      <c:set var="bookImg" value="url('${book.imageUrl}')" />
+      <c:set var="bannerBg" value="url('${book.bannerUrl}')" />
+
+      .manga-img {
+        background-image: ${bookImg};
+      }
+
+      .banner {
+        background-image: 
+          linear-gradient(to right, rgba(35, 35, 35, 0.5), rgba(35, 35, 35, 0.5)), 
+          ${bannerBg};
+      }
+    </style>
   </head>
   <body>
     <c:import url="header.html" charEncoding="UTF-8" />
 
-    <div class="banner" style="background-image: 
-         linear-gradient(to right, rgba(35, 35, 35, 0.5), rgba(35, 35, 35, 0.5)), 
-         url(content/img/background/dango.jpg);">
+    <div class="banner">
       <div class="body">
-        <div class="manga-img" style="background-image: url(content/img/banner-link.png)">
+        <div class="manga-img">
         </div>
         <div class="banner-info">
           <p class="title">
-            Kuro
+            <c:out value="${book.name}" />
           </p>
           <p class="description">
-            Câu chuyện về một bé mèo đen tên là Kuro và một cô bé cô đơn Coco sống trong một tòa biệt thự rộng lớn....
+            <c:if test="${not empty book.description}">
+              <c:choose>
+                <c:when test="${f:length(book.description) > 170}">
+                  ${f:substring(book.description, 0, 170)}...
+                </c:when>
+                <c:otherwise>
+                  ${book.description}
+                </c:otherwise>
+              </c:choose>
+            </c:if>
           </p>
         </div>
       </div>
       <div class="footer">
         <ul>
           <li>
-            5 <span>tập truyện</span>
+            <c:choose>
+              <c:when test="${not empty book.chapterList}">
+                <c:out value="${f:length(book.chapterList)}"/> <span>chương</span>
+              </c:when>
+              <c:otherwise>
+                0 <span>chương</span>
+              </c:otherwise>
+            </c:choose>
           </li>
           <li>
-            123 <span>chương</span>
-          </li>
-          <li>
-            2,800 <span>lượt xem</span>
+            <c:out value="${book.totalView}" /> <span>lượt xem</span>
           </li>
         </ul>
         <a class="btn-bookmark">
@@ -60,15 +91,44 @@
         <div class="content">
           <div class="info">
             <ul>
-              <li class="info-child"><b>Tên khác: </b>- 異能バトルは日常系のなかで - Inou Battle Within Everyday Life - </li>
-              <li class="info-child">
-                <b>Thể loại: </b>- <a href="http://truyen.vnsharing.site/index/TimKiem/1/key::Comedy">Comedy</a> - <a href="http://truyen.vnsharing.site/index/TimKiem/1/key::Romance ">Romance </a> - <a href="http://truyen.vnsharing.site/index/TimKiem/1/key::School Life ">School Life </a> - <a href="http://truyen.vnsharing.site/index/TimKiem/1/key::Shounen">Shounen</a> - <a href="http://truyen.vnsharing.site/index/TimKiem/1/key::Supernatural ">Supernatural </a> - </li>
-              <li class="info-child"><b>Tác giả: </b>NOZOMI Kota, KUROSE Kousuke</li>
-              <li class="info-child"><b>Nhà xuất bản: </b>Comp Ace (Kadokawa Shoten)</li>
-              <li class="info-child"><b>Trạng thái: </b>Đang phát hành</li>
-              <li class="info-child"><b>Ngày phát hành: </b>2013</li>
-              <li class="info-child"><b>Giới hạn độ tuổi: </b>[13+] Truyện dành cho lứa tuổi thiếu niên</li>
-              <li class="info-child"><b>Giới thiệu truyện: </b>Đối với những ai xem qua Chuunibyou demo koi ga shitai! rồi thì chắc hẳn sẽ không lạ gì hội chứng tuổi teen hoang tưởng của Main chính trong truyện này nữa 8-}, có khác chăng là Main ta có dị năng thật mà thôi, mỗi tội là cái dị năng đó nó... </li>
+              <c:if test="${not empty book.anotherName}">
+                <li class="info-child"><b>Tên khác: </b>- ${book.anotherName} -</li>
+                </c:if>
+                <c:if test="${not empty book.bookGenreMappingList}">
+                <li class="info-child"><b>Thể loại: </b>
+                  <c:forEach var="mapping" items="${book.bookGenreMappingList}" varStatus="loop">
+                    - <a href="#">${mapping.genreId.name}</a>
+                    <c:if test="${loop.last}"> -</c:if>
+                  </c:forEach>
+                </li>
+              </c:if>
+              <c:if test="${not empty book.bookAuthorMappingList}">
+                <li class="info-child"><b>Tác giả: </b>
+                  <c:forEach var="mapping" items="${book.bookAuthorMappingList}" varStatus="loop">
+                    ${mapping.authorId.name}
+                    <c:if test="${!loop.last}">, </c:if>
+                  </c:forEach>
+                </li>
+              </c:if>
+              <c:if test="${not empty book.status}">
+                <li class="info-child"><b>Trạng thái: </b>
+                  <c:forEach var="status" items="${bookStatusList}">
+                    <c:if test="${book.status == status.value}">
+                      ${status.name}
+                    </c:if>
+                  </c:forEach>
+                </li>
+              </c:if>
+              <c:if test="${not empty book.releasedDate}">
+                <li class="info-child"><b>Ngày phát hành: </b>
+                  <fmt:formatDate pattern="dd/MM/yyyy" value="${book.releasedDate}" />
+                </li>
+              </c:if>
+              <c:if test="${not empty book.description}">
+                <li class="info-child"><b>Giới thiệu truyện: </b>
+                  ${book.description}
+                </li>
+              </c:if>
             </ul>
           </div>
         </div>
@@ -76,102 +136,25 @@
           CHƯƠNG TRUYỆN
         </div>
         <div class="content">
-          <div class="volume-wrapper">
-            <div class="volume">
-              <span class="volume-number">Tập 2</span>
-              <span class="num-of-chapters">Chương 6 - 10</span>
-            </div>
+          <div class="chapter-wrapper">
             <ul class="chapters">
-              <li>
-                <div class="link">
-                  <a href="#">Chương 10: You wouldn't just leave me there</a>
-                </div>
-                <div class="release-date">
-                  Jul 22, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 9: Might not be able to go back</a>
-                </div>
-                <div class="release-date">
-                  Jul 21, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 8: A game she used to play a lot</a>
-                </div>
-                <div class="release-date">
-                  Jul 20, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 7: NO.2? At least!</a>
-                </div>
-                <div class="release-date">
-                  Jul 19, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 6: Getting to the Point, I've Obtained a Superpower</a>
-                </div>
-                <div class="release-date">
-                  Jul 18, 2016
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="content">
-          <div class="volume-wrapper">
-            <div class="volume">
-              <span class="volume-number">Tập 1</span>
-              <span class="num-of-chapters">Chương 1 - 5</span>
-            </div>
-            <ul class="chapters">
-              <li>
-                <div class="link">
-                  <a href="#">Chương 5: You wouldn't just leave me there</a>
-                </div>
-                <div class="release-date">
-                  Jul 17, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 4: Might not be able to go back</a>
-                </div>
-                <div class="release-date">
-                  Jul 16, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 3: A game she used to play a lot</a>
-                </div>
-                <div class="release-date">
-                  Jul 15, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 2: NO.2? At least!</a>
-                </div>
-                <div class="release-date">
-                  Jul 14, 2016
-                </div>
-              </li>
-              <li>
-                <div class="link">
-                  <a href="#">Chương 1: Getting to the Point, I've Obtained a Superpower</a>
-                </div>
-                <div class="release-date">
-                  Jul 13, 2016
-                </div>
-              </li>
+              <c:if test="${not empty book.chapterList}">
+                <c:forEach var="chapter" items="${book.chapterList}">
+                  <li>
+                    <div class="link">
+                      <a href="#">
+                        Chương <fmt:formatNumber type="number" value="${chapter.number}" />
+                        <c:if test="${not empty chapter.name}">
+                          : <c:out value="${chapter.name}" />
+                        </c:if>
+                      </a>
+                    </div>
+                    <div class="release-date">
+                      <fmt:formatDate pattern="dd-MM-yyyy" value="${chapter.releasedDate}" />
+                    </div>
+                  </li>
+                </c:forEach>
+              </c:if>
             </ul>
           </div>
         </div>

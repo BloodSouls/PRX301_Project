@@ -1,18 +1,20 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Jul 1, 2017, 10:15:16 AM
-    Author     : User
-*/
+
+body {
+  background-color: #333;
+}
 
 .chapterDetail-title{
     background: url(../img/default-banner.jpg);
     height: 170px;;
 }
 
+.chapterDetail-content {
+  width: 100%;
+}
+
+.chapterDetail-content .manga-page {
+  text-align: center;
+}
 
 .chapterDetail-title-footer{
     background: url(../img/default-banner.jpg);

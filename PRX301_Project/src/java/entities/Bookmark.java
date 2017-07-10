@@ -19,7 +19,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,14 +41,18 @@ public class Bookmark implements Serializable {
   @NotNull
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @XmlElement(required = true)
   private Integer id;
   @Column(name = "Active")
+  @XmlTransient
   private Boolean active;
   @JoinColumn(name = "BookId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private Book bookId;
   @JoinColumn(name = "UserId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private User userId;
 
   public Bookmark() {

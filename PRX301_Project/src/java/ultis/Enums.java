@@ -17,16 +17,24 @@ public class Enums {
   }
   
   public enum BookStatus {
-    COMPLETE(0), NOT_COMPLETED(1), DROP(2);
+    COMPLETE(0, "Hoàn thiện"), 
+    NOT_COMPLETED(1, "Đang phát hành"), 
+    DROP(2, "Ngừng nữa đường");
     
     private final int value;
+    private final String name;
 
-    private BookStatus(final int value) {
+    private BookStatus(final int value, final String name) {
       this.value = value;
+      this.name = name;
     }
     
     public int getValue() {
       return this.value;
+    }
+    
+    public String getName() {
+      return this.name;
     }
   }
   

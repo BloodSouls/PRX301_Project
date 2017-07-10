@@ -20,14 +20,19 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -36,6 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "Book")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "book", propOrder = {"id", "name", "anotherName", "releasedDate", "description",
+ "imageUrl", "bannerUrl", "totalView", "status"})
 @NamedQueries({
   @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
   @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :id"),
@@ -56,51 +64,68 @@ public class Book implements Serializable {
   @NotNull
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @XmlElement(required = true)
   private Integer id;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 200)
   @Column(name = "Name")
+  @XmlElement(required = true)
   private String name;
   @Size(max = 500)
   @Column(name = "AnotherName")
+  @XmlElement(required = true)
   private String anotherName;
   @Column(name = "ReleasedDate")
   @Temporal(TemporalType.TIMESTAMP)
+  @XmlElement(required = true)
   private Date releasedDate;
   @Basic(optional = false)
   @NotNull
   @Column(name = "CreatingDate")
   @Temporal(TemporalType.TIMESTAMP)
+  @XmlTransient
   private Date creatingDate;
   @Size(max = 1073741823)
   @Column(name = "Description")
+  @XmlElement(required = true)
   private String description;
   @Size(max = 255)
   @Column(name = "ImageUrl")
+  @XmlElement(required = true)
   private String imageUrl;
   @Size(max = 255)
   @Column(name = "BannerUrl")
+  @XmlElement(required = true)
   private String bannerUrl;
   @Basic(optional = false)
   @NotNull
   @Column(name = "TotalView")
+  @XmlElement(required = true)
   private int totalView;
   @Basic(optional = false)
   @NotNull
   @Column(name = "Status")
+  @XmlElement(required = true)
   private int status;
   @Column(name = "IsActive")
+  @XmlTransient
   private Boolean isActive;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
+  @XmlTransient
   private List<Bookmark> bookmarkList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
+  @XmlTransient
   private List<Rating> ratingList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
+  @XmlTransient
   private List<Chapter> chapterList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
+  @XmlTransient
   private List<BookAuthorMapping> bookAuthorMappingList;
+  @OrderBy("genreId ASC")
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
+  @XmlTransient
   private List<BookGenreMapping> bookGenreMappingList;
   
   @Transient

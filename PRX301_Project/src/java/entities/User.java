@@ -24,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -52,39 +53,50 @@ public class User implements Serializable {
   @NotNull
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @XmlElement(required = true)
   private Integer id;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 50)
   @Column(name = "Username")
+  @XmlElement(required = true)
   private String username;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 50)
   @Column(name = "Password")
+  @XmlElement(required = true)
   private String password;
   @Column(name = "DateOfBirth")
   @Temporal(TemporalType.TIMESTAMP)
+  @XmlElement(required = true)
   private Date dateOfBirth;
   // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
   @Size(max = 50)
   @Column(name = "Email")
+  @XmlElement(required = true)
   private String email;
   @Column(name = "Gender")
+  @XmlElement(required = true)
   private Boolean gender;
   @Basic(optional = false)
   @NotNull
   @Column(name = "RoleType")
+  @XmlElement(required = true)
   private int roleType;
   @Size(max = 50)
   @Column(name = "Address")
+  @XmlElement(required = true)
   private String address;
   @Size(max = 255)
   @Column(name = "ImageUrl")
+  @XmlElement(required = true)
   private String imageUrl;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+  @XmlTransient
   private List<Bookmark> bookmarkList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+  @XmlTransient
   private List<Rating> ratingList;
 
   public User() {

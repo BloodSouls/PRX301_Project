@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -41,18 +42,22 @@ public class ChapterPage implements Serializable {
   @NotNull
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @XmlElement(required = true)
   private Integer id;
   @Basic(optional = false)
   @NotNull
   @Column(name = "PageNumber")
+  @XmlElement(required = true)
   private int pageNumber;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 255)
   @Column(name = "ImageUrl")
+  @XmlElement(required = true)
   private String imageUrl;
   @JoinColumn(name = "ChapterId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private Chapter chapterId;
 
   public ChapterPage() {

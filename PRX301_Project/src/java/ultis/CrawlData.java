@@ -450,7 +450,7 @@ public class CrawlData {
                     if (content.contains(":")) {
                       data = content.split(":");
 
-                      if (!data[0].matches("\\d+")) { // Trường hợp số dính chung với chữ. Vd: 000A, 000B
+                      if (!data[0].matches("\\d+(\\.\\d+)?")) { // Trường hợp số dính chung với chữ. Vd: 000A, 000B
                         data[0] = content.replaceAll("\\D+", ""); // Xóa ký tự ko phải số
                       }
                     } else if (content.contains("-")) {
@@ -465,7 +465,7 @@ public class CrawlData {
                       data[0] = content.substring(0, firstSpace);
                       data[1] = content.substring(firstSpace + 1);
                     } else {
-                      if (!content.matches("\\d+")) {
+                      if (!content.matches("\\d+(\\.\\d+)?")) {
                         data[0] = content.replaceAll("\\D+", "");
                       } else {
                         data[0] = content;
