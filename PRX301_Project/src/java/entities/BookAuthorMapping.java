@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -38,12 +39,15 @@ public class BookAuthorMapping implements Serializable {
   @NotNull
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @XmlElement(required = true)
   private Integer id;
   @JoinColumn(name = "AuthorId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private Author authorId;
   @JoinColumn(name = "BookId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private Book bookId;
 
   public BookAuthorMapping() {

@@ -23,6 +23,7 @@
   border-radius: 5px;
   position: absolute;
   z-index: 3;
+  background-size: cover;
 }
 
 .banner-info {
@@ -98,6 +99,7 @@
 /* Left content */
 .manga-detail .left-content {
   max-width: 700px;
+  width: 100%;
   float: left;
 }
 
@@ -131,53 +133,48 @@
   color: #2e81ca;
   /*color: #FF5D00;*/
 }
+.manga-detail .left-content .content .info ul .info-child a:hover {
+  color: #ff8f00;
+}
 
-.manga-detail .left-content .content .volume-wrapper {
+.manga-detail .left-content .content .chapter-wrapper {
   display: block;
   width: 100%;
 }
 
-.manga-detail .left-content .content .volume-wrapper .volume {
-  padding: 3px 10px;
-}
-.manga-detail .left-content .content .volume-wrapper .volume .volume-number {
-  font-size: 20px;
-}
-.manga-detail .left-content .content .volume-wrapper .volume .num-of-chapters {
-  font-size: 16px;
-}
-
-.manga-detail .left-content .content .volume-wrapper .chapters {
-  font-size: 14px;
+.manga-detail .left-content .content .chapter-wrapper .chapters {
+  font-size: 15px;
   list-style: none;
-  padding-left: 20px;
-  padding-right: 10px;
 }
 
-.manga-detail .left-content .content .volume-wrapper .chapters li {
-  padding: 3px 0px;
+.manga-detail .left-content .content .chapter-wrapper .chapters li {
   display: inline-block;
+  padding: 3px 0px;
   width: 100%;
 }
-.manga-detail .left-content .content .volume-wrapper .chapters li:nth-child(odd) {
+
+.manga-detail .left-content .content .chapter-wrapper .chapters li:nth-child(odd) {
   background-color: #f9f9f9;
 }
-.manga-detail .left-content .content .volume-wrapper .chapters li .link {
+.manga-detail .left-content .content .chapter-wrapper .chapters li .link {
   max-width: 580px;
   float: left;
   text-align: left;
+  margin-left: 10px
 }
-.manga-detail .left-content .content .volume-wrapper .chapters li .link a {
+.manga-detail .left-content .content .chapter-wrapper .chapters li .link a {
   text-decoration: none;
   color: #2e81ca;
 }
-.manga-detail .left-content .content .volume-wrapper .chapters li .link a:hover {
+.manga-detail .left-content .content .chapter-wrapper .chapters li .link a:hover {
   color: #ff8f00;
 }
-.manga-detail .left-content .content .volume-wrapper .chapters li .release-date {
+.manga-detail .left-content .content .chapter-wrapper .chapters li .release-date {
   max-width: 100px;
   float: right;
   text-align: right;
+  margin-right: 3px;
+  color: #969696;
 }
 
 .clear:after {

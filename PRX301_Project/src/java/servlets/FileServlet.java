@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ultis.Const;
 
 /**
  *
@@ -43,7 +44,9 @@ public class FileServlet extends HttpServlet {
       return;
     }
 
-    String filePath = getServletConfig().getInitParameter("filePath");
+//    String filePath = getServletConfig().getInitParameter("filePath");
+    String filePath = Const.IMAGE_PATH;
+    System.out.println(URLDecoder.decode(requestedFile, "UTF-8"));
     File file = new File(filePath, URLDecoder.decode(requestedFile, "UTF-8"));
     if (!file.exists()) {
       response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.

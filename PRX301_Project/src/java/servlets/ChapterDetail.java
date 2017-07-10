@@ -5,24 +5,20 @@
  */
 package servlets;
 
+import dao.ChapterDAO;
+import entities.Chapter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ultis.Ultilities;
 
 /**
  *
  * @author USER
  */
-public class DispatchServlet extends HttpServlet {
-
-  private final String mainPageServlet = "MainPageServlet";
-  private final String bookDetailServlet = "BookDetailServlet";
-  private final String chapterDetailServlet = "ChapterDetailServlet";
+public class ChapterDetail extends HttpServlet {
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,30 +33,22 @@ public class DispatchServlet extends HttpServlet {
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-
-    String action = request.getParameter("btnAction");
-    String url = "";
     
-//    Ultilities.crawlAndSaveDataToDB(1, 1);
+    String strChapterId = request.getParameter("chapterId");
     
     try {
-      if (action == null) {
-        url = mainPageServlet;
-      } else if (action.equals("Đăng Nhập")) {
-
-      } else if (action.equals("Đăng ký")) {
-
-      } else if (action.equals("viewBook")) {
-        url = bookDetailServlet;
-      } else if (action.equals("viewChapter")) {
-        url = chapterDetailServlet;
+      if (strChapterId.matches("\\d+")) {
+        int chapterId = Integer.parseInt(strChapterId);
+        Chapter chapter = ChapterDAO.getChapterById(chapterId);
+        
+        request.setAttribute("CHAPTER", chapter);
+        
+        
       }
+      
     } finally {
-      RequestDispatcher rd = request.getRequestDispatcher(url);
-      rd.forward(request, response);
       out.close();
     }
-
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

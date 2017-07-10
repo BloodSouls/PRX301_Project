@@ -17,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -38,12 +40,15 @@ public class BookGenreMapping implements Serializable {
   @NotNull
   @Column(name = "Id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @XmlElement(required = true)
   private Integer id;
   @JoinColumn(name = "BookId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private Book bookId;
   @JoinColumn(name = "GenreId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
+  @XmlElement(required = true)
   private Genre genreId;
 
   public BookGenreMapping() {

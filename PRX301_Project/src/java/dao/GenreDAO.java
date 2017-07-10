@@ -1,6 +1,7 @@
 package dao;
 
 import entities.Genre;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import ultis.Ultilities;
@@ -36,7 +37,10 @@ public class GenreDAO {
               Genre.class).setMaxResults(1);
       query.setParameter("name", name);
       
-      genre = query.getSingleResult();
+      List<Genre> result = query.getResultList();
+      if (!result.isEmpty()) {
+        genre = result.get(0);
+      }
     } catch (Exception e) {
       e.printStackTrace();
     } finally {

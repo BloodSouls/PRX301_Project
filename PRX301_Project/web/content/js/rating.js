@@ -26,12 +26,12 @@ function chooseRating(event) {
   for (var i = 1; i <= 5; ++i) {
     var star = document.getElementById("star" + i);
     if (i < curStarIndex) {
-      star.src = "Content/img/icon/full-star.png";
+      star.src = "content/img/icon/full-star.png";
     } else if (i == curStarIndex) {
-      star.src = isFullStar ? "Content/img/icon/full-star.png"
-              : "Content/img/icon/half-star.png";
+      star.src = isFullStar ? "content/img/icon/full-star.png"
+              : "content/img/icon/half-star.png";
     } else {
-      star.src = "Content/img/icon/empty-star.png";
+      star.src = "content/img/icon/empty-star.png";
     }
   }
   
@@ -46,13 +46,13 @@ function reloadRating() {
   for (var i = 1; i <= 5; ++i) {
     var star = document.getElementById("star" + i);
     if (i < starIndex) {
-      star.src = "Content/img/icon/full-star.png";
+      star.src = "content/img/icon/full-star.png";
     } else if (i == starIndex) {
       star.src = (starIndex == ratingValue)
-              ? "Content/img/icon/full-star.png"
-              : "Content/img/icon/half-star.png";
+              ? "content/img/icon/full-star.png"
+              : "content/img/icon/half-star.png";
     } else {
-      star.src = "Content/img/icon/empty-star.png";
+      star.src = "content/img/icon/empty-star.png";
     }
   }
 }
