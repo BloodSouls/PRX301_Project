@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import dao.UserDAO;
+import entities.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -12,23 +14,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ultis.Ultilities;
+import javax.servlet.http.HttpSession;
+import ultis.Enums;
 
 /**
  *
  * @author USER
  */
-public class DispatchServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
-  private final String loginPage = "login.jsp";
-
-  private final String mainPageServlet = "MainPageServlet";
-  private final String bookDetailServlet = "BookDetailServlet";
-  private final String chapterDetailServlet = "ChapterDetailServlet";
-  private final String searchServlet = "SearchServlet";
-  private final String loginServlet = "LoginServlet";
-  private final String registerServlet = "RegisterServlet";
-  
+  private final String registerPage = "login.jsp";
+  private final String mainPage = "MainPageServlet";
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,33 +40,42 @@ public class DispatchServlet extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
-    String action = request.getParameter("btnAction");
-    String url = "";
+    String txtUsername = request.getParameter("txtUsername").trim();
+    String txtPassword = request.getParameter("txtPassword").trim();
+    String txtEmail = request.getParameter("txtEmail").trim();
 
-//    Ultilities.crawlAndSaveDataToDB(1, 1);
+    String url = registerPage;
+    String errorMessage = "";
+
+    HttpSession session = request.getSession();
     try {
-      if (action == null) {
-        url = mainPageServlet;
-      } else if (action.equals("loginPage")) {
-        url = loginPage;
-        request.setAttribute("LOGIN_ACTIVATION", true);
-      } else if (action.equals("login")) {
-        url = loginServlet;
-      } else if (action.equals("register")) {
-        url = registerServlet;
-      } else if (action.equals("viewBook")) {
-        url = bookDetailServlet;
-      } else if (action.equals("viewChapter")) {
-        url = chapterDetailServlet;
-      } else if (action.equals("search")) {
-        url = searchServlet;
+
+      if (UserDAO.findUserByUsername(txtUsername) != null) {
+        errorMessage = "Tài khoản đã tồn tại";
+      } else if (UserDAO.findUserByEmail(txtEmail) != null) {
+        errorMessage = "Email đã được sử dụng";
       }
+
+      if (errorMessage == "") {
+        User user = new User();
+        user.setUsername(txtUsername);
+        user.setPassword(txtPassword);
+        user.setEmail(txtEmail);
+        user.setRoleType(Enums.PersonType.NORMAL_USER.getValue());
+
+        UserDAO.createUser(user);
+        session.setAttribute("USER_NAME", txtUsername);
+        url = mainPage;
+      } else {
+        request.setAttribute("REGISTER_ERROR_MESSAGE", errorMessage);
+        request.setAttribute("LOGIN_ACTIVATION", false);
+      }
+
     } finally {
       RequestDispatcher rd = request.getRequestDispatcher(url);
       rd.forward(request, response);
       out.close();
     }
-
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -11,6 +11,7 @@ and open the template in the editor.
 .frame-container{
   margin: 8% 11% 5% 15%;
   display: inline-block;
+  min-width: 70%;
 }
 
 .head{
@@ -49,13 +50,17 @@ and open the template in the editor.
 .update-item{
   float: left;
   width: 159px;
-  height: 230px;
+  height: 240px;
   margin: 2% 4% 2% 0%;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-weight: bold;
 }
 
 .update-item img{
   width: 159px;
-  height: 180px;
+  height: 200px;
 }
 
 .frame-list-update,
@@ -65,12 +70,12 @@ and open the template in the editor.
   min-height: 600px;
 }
 
-.search-title{
+.search-title {
   background: url(../img/default-banner.jpg);
   height: 115px;
 }
 
-.search-filter{
+.search-filter {
   height: 200px;
   margin-right: 6%;
 }
@@ -78,10 +83,10 @@ and open the template in the editor.
   margin: 0% 0% 5% 9%;
 }
 
-.search-title span{
+.search-title span {
   margin-left: 16%;
   color: white;
-  font-size: 41px;
+  font-size: 36px;
   font-weight: 600;
   line-height: 111px;
 }

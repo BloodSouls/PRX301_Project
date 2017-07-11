@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -12,23 +13,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ultis.Ultilities;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author USER
  */
-public class DispatchServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
   private final String loginPage = "login.jsp";
-
-  private final String mainPageServlet = "MainPageServlet";
-  private final String bookDetailServlet = "BookDetailServlet";
-  private final String chapterDetailServlet = "ChapterDetailServlet";
-  private final String searchServlet = "SearchServlet";
-  private final String loginServlet = "LoginServlet";
-  private final String registerServlet = "RegisterServlet";
-  
+  private final String mainPage = "MainPageServlet";
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,36 +35,30 @@ public class DispatchServlet extends HttpServlet {
    */
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
+    response.setContentType("text/html;charset=UTF-8");
 
-    String action = request.getParameter("btnAction");
-    String url = "";
-
-//    Ultilities.crawlAndSaveDataToDB(1, 1);
+    String url = loginPage;
     try {
-      if (action == null) {
-        url = mainPageServlet;
-      } else if (action.equals("loginPage")) {
-        url = loginPage;
+      String txtUsername = request.getParameter("txtUsername").trim();
+      String txtPassword = request.getParameter("txtPassword").trim();
+      
+      txtUsername = txtUsername == null ? "" : txtUsername;
+      txtPassword = txtPassword == null ? "" : txtPassword;
+      
+      HttpSession session = request.getSession();
+      if (UserDAO.login(txtUsername, txtPassword)) {
+        url = mainPage;
+        session.setAttribute("USER_NAME", txtUsername);
+      } else {
+        request.setAttribute("LOGIN_ERROR_MESSAGE", "Tên đăng nhập hoặc mật khẩu bị sai");
         request.setAttribute("LOGIN_ACTIVATION", true);
-      } else if (action.equals("login")) {
-        url = loginServlet;
-      } else if (action.equals("register")) {
-        url = registerServlet;
-      } else if (action.equals("viewBook")) {
-        url = bookDetailServlet;
-      } else if (action.equals("viewChapter")) {
-        url = chapterDetailServlet;
-      } else if (action.equals("search")) {
-        url = searchServlet;
       }
     } finally {
       RequestDispatcher rd = request.getRequestDispatcher(url);
       rd.forward(request, response);
       out.close();
     }
-
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

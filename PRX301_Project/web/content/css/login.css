@@ -32,9 +32,13 @@ form {
   display: none;
 }
 
-.login-box-msg, .register-box-msg {
+.login-box-msg, .register-box-msg, .error-box {
   padding: 0px 20px 20px;
   text-align: center;
+}
+
+.error-box {
+  color: red;
 }
 
 .my-input-wrapper {
