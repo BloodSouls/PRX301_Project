@@ -5,26 +5,23 @@
  */
 package servlets;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import dao.ChapterDAO;
+import entities.Chapter;
 import java.io.IOException;
-import java.net.URLDecoder;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ultis.Const;
 
 /**
  *
  * @author USER
  */
-public class FileServlet extends HttpServlet {
-
-  private final int DEFAULT_BUFFER_SIZE = 10240;
-
+public class ChapterDetailServlet extends HttpServlet {
+  private final String chapterDetailPage = "chapterDetail.jsp";
+  
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
    * methods.
@@ -37,47 +34,39 @@ public class FileServlet extends HttpServlet {
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    
-    String requestedFile = request.getPathInfo();
-    if (requestedFile == null) {
-      response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
-      return;
-    }
+    PrintWriter out = response.getWriter();
 
-//    String filePath = getServletConfig().getInitParameter("filePath");
-    String filePath = Const.IMAGE_PATH;
-    File file = new File(filePath, URLDecoder.decode(requestedFile, "UTF-8"));
-    if (!file.exists()) {
-      response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404.
-      return;
-    }
-
-    String contentType = getServletContext().getMimeType(file.getName());
-    if (contentType == null) {
-      contentType = "application/octet-stream";
-    }
-
-    response.reset();
-    response.setBufferSize(DEFAULT_BUFFER_SIZE);
-    response.setContentType(contentType);
-    response.setHeader("Content-Length", String.valueOf(file.length()));
-    response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
-
-    BufferedInputStream input = null;
-    BufferedOutputStream output = null;
+    String strChapterId = request.getParameter("chapterId");
 
     try {
-      input = new BufferedInputStream(new FileInputStream(file), DEFAULT_BUFFER_SIZE);
-      output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
+      if (strChapterId.matches("\\d+")) {
+//        int chapterId = Integer.parseInt(strChapterId);
+//        Chapter chapter = ChapterDAO.getChapterById(chapterId);
+//        
+//        
+//        ChapterPages cps = new ChapterPages();
+//        List<ChapterPage> list = ChapterPageDAO.getChapterPageByChapterId(chapterId);
+//        cps.setChapterPageList(list);
+//        
+//        JAXBContext jc = JAXBContext.newInstance(ChapterPages.class);
+//        Marshaller marshaller = jc.createMarshaller();
+//        
+//        StringWriter sw = new StringWriter();
+//        marshaller.marshal(cps, sw);
+////        out.println(sw.toString());
+//        
+//        request.setAttribute("XMLString", sw.toString());
 
-      byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
-      int length;
-      while ((length = input.read(buffer)) > 0) {
-        output.write(buffer, 0, length);
+        int chapterId = Integer.parseInt(strChapterId);
+        Chapter chapter = ChapterDAO.getChapter(chapterId);
+
+        request.setAttribute("CHAPTER", chapter);
       }
+
     } finally {
-      input.close();
-      output.close();
+      RequestDispatcher rd = request.getRequestDispatcher(chapterDetailPage);
+      rd.forward(request, response);
+      out.close();
     }
   }
 

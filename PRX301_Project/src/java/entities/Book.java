@@ -119,6 +119,7 @@ public class Book implements Serializable {
   private List<Rating> ratingList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
   @XmlTransient
+  @OrderBy("number DESC")
   private List<Chapter> chapterList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookId")
   @XmlTransient

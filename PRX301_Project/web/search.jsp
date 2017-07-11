@@ -6,6 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
+
+<c:set var="bookXML" value="${requestScope.BOOK_LIST}" />
+<c:set var="titleMessage" value="${requestScope.TITLE}" />
+<c:import var="bookXSL" url="WEB-INF/bookList.xsl" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,161 +27,24 @@
             <span>Danh sách / Tìm kiếm</span>
         </div>
 
-        <div class="">
-
-        </div>
-
         <div class="frame-container">
             <div class="frame-list-update">
                 <div class="head">
-                    <div class="title">MỚI CẬP NHẬT</div>
+                  <div class="title">
+                    <c:if test="${empty titleMessage}">
+                      KHÔNG TÌM THẤY DỮ LIỆU
+                    </c:if>
+                    ${titleMessage}
+                  </div>
                     <div class="btnFilter"><a href="#filter">Nâng cao</a></div>
                 </div>
-                <div class="description-head">Các bộ manga mới cập nhật tập mới</div>
+                <!--<div class="description-head">Các bộ manga mới cập nhật tập mới</div>-->
                 <div class="update-list">
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <div>
-                            <span>Tên truyện</span>
-                        </div>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
-                    <div class="update-item">
-                        <img src="content/img/default-banner.jpg"/>
-                        <span>Tên truyện</span>
-                    </div>
+                  <c:if test="${not empty titleMessage}">
+                    <x:transform xml="${bookXML}" xslt="${bookXSL}" />
+                  </c:if>
                 </div>
             </div>
-            <!--            <div class="frame-list-new">
-                            <div class="head">
-                                <div class="title">MỚI RA MẮT</div>
-                            </div>
-                            <div class="description-head">Các bộ manga mới ra</div>
-                            <div class="update-list">
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="frame-list-popular">
-                            <div class="head">
-                                <div class="title">PHỔ BIẾN</div>
-                            </div>
-                            <div class="description-head">Các bộ manga được nhiều người xem</div>
-                            <div class="update-list">
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                                <div class="update-item">
-                                    <img src="content/img/default-banner.jpg"/>
-                                    <span>Tên truyện</span>
-                                </div>
-                            </div>
-                        </div>-->
-
-
-
         </div>
         <a href="#x" id="filter" class="overlay"></a>
         <div class="popup">

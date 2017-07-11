@@ -1,17 +1,17 @@
 <header>
-    <div class="container">
-        <div class="logo fr-menu-logo">
-            <img src="content/img/logo.png" alt=""/>
-        </div>
-        <div class="menu">
-            <div class="fr-menu"><a href="">Trang chủ</a></div>
-            <div class="fr-menu"><a href="">Phổ biến</a></div>
-            <div class="fr-menu"><a href="">Mới cập nhật</a></div>
-            <div class="search">
-                <form class="fr-search">
-                    <input type="search" />
-                </form>
-            </div>
-        </div>
+  <div class="container">
+    <div class="logo fr-menu-logo">
+      <img src="content/img/logo.png" alt=""/>
     </div>
+    <div class="menu">
+      <div class="fr-menu"><a href="DispatchServlet">Trang chủ</a></div>
+      <div class="fr-menu"><a href="DispatchServlet?btnAction=search&amp;type=mostview">Phổ biến</a></div>
+      <div class="fr-menu"><a href="DispatchServlet?btnAction=search&amp;type=update">Mới cập nhật</a></div>
+      <div class="search">
+        <form action="DispatchServlet?btnAction=search" class="fr-search">
+          <input type="search" name="value" value="" />
+        </form>
+      </div>
+    </div>
+  </div>
 </header>

@@ -23,6 +23,8 @@ public class DispatchServlet extends HttpServlet {
   private final String mainPageServlet = "MainPageServlet";
   private final String bookDetailServlet = "BookDetailServlet";
   private final String chapterDetailServlet = "ChapterDetailServlet";
+  private final String searchServlet = "SearchServlet";
+  private final String loginPage = "login.jsp";
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,14 +48,19 @@ public class DispatchServlet extends HttpServlet {
     try {
       if (action == null) {
         url = mainPageServlet;
-      } else if (action.equals("Đăng Nhập")) {
-
-      } else if (action.equals("Đăng ký")) {
-
+      } else if (action.equals("loginPage")) {
+        url = loginPage;
+        request.setAttribute("LOGIN_ACTIVATION", true);
+      } else if (action.equals("login")) {
+        
+      } else if (action.equals("register")) {
+        
       } else if (action.equals("viewBook")) {
         url = bookDetailServlet;
       } else if (action.equals("viewChapter")) {
         url = chapterDetailServlet;
+      } else if (action.equals("search")) {
+        url = searchServlet;
       }
     } finally {
       RequestDispatcher rd = request.getRequestDispatcher(url);

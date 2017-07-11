@@ -21,8 +21,8 @@
     <link href="content/css/bookDetail.css" rel="stylesheet" type="text/css"/>
     <script src="content/js/rating.js" type="text/javascript"></script>
     <style>
-      <c:set var="bookImg" value="url('${book.imageUrl}')" />
-      <c:set var="bannerBg" value="url('${book.bannerUrl}')" />
+      <c:set var="bookImg" value="url('image${book.imageUrl}')" />
+      <c:set var="bannerBg" value="url('image${book.bannerUrl}')" />
 
       .manga-img {
         background-image: ${bookImg};
@@ -142,7 +142,7 @@
                 <c:forEach var="chapter" items="${book.chapterList}">
                   <li>
                     <div class="link">
-                      <a href="#">
+                      <a href="DispatchServlet?btnAction=viewChapter&chapterId=${chapter.id}">
                         Chương <fmt:formatNumber type="number" value="${chapter.number}" />
                         <c:if test="${not empty chapter.name}">
                           : <c:out value="${chapter.name}" />

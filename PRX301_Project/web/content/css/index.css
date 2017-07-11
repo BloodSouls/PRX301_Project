@@ -8,130 +8,146 @@ and open the template in the editor.
     Author     : User
 */
 
-.banner img{
-    width: 100%;
-    height: 520px;
+.banner img {
+  width: 100%;
+  height: 520px;
 }
 
-.frame-link{
-    background-color: #FC2;
-    height: 100px;
+.frame-link {
+  background-color: #FC2;
+  height: 100px;
+  margin-top: -4px;
 }
 
-.frame-link img{
-    position: absolute;
-    top: 71%;
-    margin-left: 15%;
+.frame-link img {
+  position: absolute;
+  top: 70%;
+  margin-left: 15%;
 }
 
-.searchBtn{
-    float: right;
-    line-height: 51px;
-    margin-right: 3%;
-    background-color: #82C242;
-    height: 50px;
-    margin-top: 21px;
-    width: 300px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 10px;
+.searchBtn {
+  float: right;
+  line-height: 51px;
+  margin-right: 3%;
+  background-color: #82C242;
+  height: 50px;
+  margin-top: 21px;
+  width: 300px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
 }
 
 .searchBtn:hover {
-    background-color: #F9F9F9;
+  background-color: #F9F9F9;
 }
 
 .searchBtn:hover a {
-    color: #82C242;
+  color: #82C242;
 }
 
 .searchBtn a {
-    text-decoration: none;
-    color: #F9F9F9;
-    font-size: 21px;
-    font-weight: 700;
+  text-decoration: none;
+  color: #F9F9F9;
+  font-size: 21px;
+  font-weight: 700;
 }
 
 .logBtn{
-    float: right;
-    margin-right: 10%;
-    float: right;
-    line-height: 51px;
-    background-color: #FF9E4B;
-    height: 50px;
-    margin-top: 21px;
-    width: 300px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 10px;
+  float: right;
+  margin-right: 10%;
+  float: right;
+  line-height: 51px;
+  background-color: #FF9E4B;
+  height: 50px;
+  margin-top: 21px;
+  width: 300px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
 }
 
-.logBtn:hover{
-    background-color: #F9F9F9;
+.logBtn:hover {
+  background-color: #F9F9F9;
 }
 
-.logBtn:hover a{
-    color: #FF9E4B;
+.logBtn:hover a {
+  color: #FF9E4B;
 }
 
-.logBtn a{
-    text-decoration: none;
-    color: #F9F9F9;
-    font-size: 21px;
-    font-weight: 700;
+.logBtn a {
+  text-decoration: none;
+  color: #F9F9F9;
+  font-size: 21px;
+  font-weight: 700;
 }
 
-.frame-container{
-    margin: 8% 11% 5% 15%;
+.frame-container {
+  margin: 8% 11% 5% 15%;
 }
 
 .head{
-    clear: both;
-    padding-bottom: 5%;
+  clear: both;
+  padding-bottom: 5%;
 }
 
-.head .title{
-    float: left;
-    font-weight: 600;
-    font-size: 21px;
+.head .title {
+  float: left;
+  font-weight: 600;
+  font-size: 21px;
 }
-.head .btnShowAll{
-    float: right;
-    height: 20px;
-    background-color: #C2C2C2;
-    padding: 1%;
-    border-radius: 5px;
-    line-height: 1.3;
+.head .btnShowAll {
+  float: right;
+  height: 20px;
+  border-radius: 5px;
+  line-height: 1.3;
+  border: 1px solid #333;
+  padding: 8px 18px;
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
-.head .btnShowAll a{
-    text-decoration: none;
+.head .btnShowAll:hover {
+  background: #dedede;
 }
-
-.description-head{
-    clear: both;
-    color: #A2A2A2;
-}
-
-.update-item{
-    float: left;
-    width: 159px;
-    height: 230px;
-    margin: 2% 4% 2% 0%;
+.head .btnShowAll a {
+  text-decoration: none;
+  color: black;
 }
 
-.update-item img{
-    width: 159px;
-    height: 180px;
+.description-head {
+  clear: both;
+  color: #A2A2A2;
+}
+
+.update-item {
+  float: left;
+  width: 159px;
+  height: 240px;
+  margin: 2% 4% 2% 0%;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+.update-item img {
+  width: 159px;
+  height: 200px;
+}
+
+.update-item div {
+  margin-top: 5px;
 }
 
 .frame-list-update,
 .frame-list-new,
-.frame-list-popular{
-    height: 600px;
+.frame-list-popular {
+  height: 600px;
 }
 
-.seperate{
-    height: 1px;
-    background-color: #FC2;
-    margin-bottom: 5%;
+.seperate {
+  height: 1px;
+  background-color: #FC2;
+  margin-bottom: 5%;
+  margin-top: 3%;
 }

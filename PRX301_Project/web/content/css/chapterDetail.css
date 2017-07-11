@@ -4,8 +4,8 @@ body {
 }
 
 .chapterDetail-title{
-    background: url(../img/default-banner.jpg);
-    height: 170px;;
+  background: url(../img/default-banner.jpg);
+  height: 135px;
 }
 
 .chapterDetail-content {
@@ -17,36 +17,36 @@ body {
 }
 
 .chapterDetail-title-footer{
-    background: url(../img/default-banner.jpg);
-    height: 170px;;
-    position: absolute;
-    width: 100%;
-    bottom: 44px;
+  background: url(../img/default-banner.jpg);
+  height: 170px;;
+  position: absolute;
+  width: 100%;
+  bottom: 44px;
 }
 
 .format-title{
-    text-align: center;
-    padding-top: 1%;
-    color:white;
+  text-align: center;
+  padding-top: 1%;
+  color:white;
 }
 
 .format-btn-link{
-    display: inline-flex;
-    float: right;
-    margin-right: 5%;
-    color: white;
+  display: inline-flex;
+  float: right;
+  margin-right: 5%;
+  color: white;
 }
 
 .btn-link a{
-    border: #faaf2a solid 1px;
-    background-color: #faaf2a;
-    border-radius: 2px;
-    cursor: pointer;
-    padding: 2px;
-    margin-left: 5px;
+  border: #faaf2a solid 1px;
+  background-color: #faaf2a;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 4px 15px;
+  margin-left: 5px;
 }
 
 .btn-link a:hover{
-    border: #e49405 solid 1px;
-    background-color: #e49405;
+  border: #e49405 solid 1px;
+  background-color: #e49405;
 }

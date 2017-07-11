@@ -5,20 +5,29 @@
  */
 package servlets;
 
-import dao.ChapterDAO;
-import entities.Chapter;
+import dao.BookDAO;
+import entities.Book;
+import entities.Books;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import ultis.Ultilities;
 
 /**
  *
  * @author USER
  */
-public class ChapterDetail extends HttpServlet {
+public class SearchServlet extends HttpServlet {
+
+  private final String searchPage = "search.jsp";
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +42,56 @@ public class ChapterDetail extends HttpServlet {
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
+    int bookQuantity = 25;
+    String searchValue = request.getParameter("value");
+    String type = request.getParameter("type");
+    String page = request.getParameter("page");
     
-    String strChapterId = request.getParameter("chapterId");
+    String resultMessage = "";
+    
+    int pageNum = 0;
+    if (page != null && page.matches("\\d+")) {
+      pageNum = Integer.parseInt(page);
+    }
     
     try {
-      if (strChapterId.matches("\\d+")) {
-        int chapterId = Integer.parseInt(strChapterId);
-        Chapter chapter = ChapterDAO.getChapterById(chapterId);
-        
-        request.setAttribute("CHAPTER", chapter);
-        
-        
+      List<Book> list = null;
+      if (type != null) {
+        type = type.toLowerCase();
+        switch (type) {
+          case "mostview":
+            list = BookDAO.getMostViewedBooks(bookQuantity, pageNum);
+            resultMessage = "PHỔ BIẾN";
+            break;
+          case "new":
+            list = BookDAO.getNewBook(bookQuantity, pageNum);
+            resultMessage = "MỚI RA MẮT";
+            break;
+          case "update":
+            list = BookDAO.getUpdatedBooks(bookQuantity, pageNum);
+            resultMessage = "MỚI CẬP NHẬT";
+            break;
+          default:
+        }
       }
       
+      if (searchValue != null) {
+        searchValue = searchValue.trim();
+        list = BookDAO.searchBookByName(searchValue, bookQuantity, pageNum);
+        resultMessage = "TÌM KIẾM: " + searchValue;
+      }
+      
+      if (list == null) {
+        list = new ArrayList<>();
+      }
+      
+      String xmlString = Ultilities.marshalBooksToString(new Books(list));
+      
+      request.setAttribute("BOOK_LIST", xmlString);
+      request.setAttribute("TITLE", resultMessage);
     } finally {
+      RequestDispatcher rd = request.getRequestDispatcher(searchPage);
+      rd.forward(request, response);
       out.close();
     }
   }

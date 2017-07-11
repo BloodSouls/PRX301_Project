@@ -20,8 +20,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -29,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "ChapterPage")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "chapterPage", propOrder = {"id", "pageNumber", "imageUrl"})
 @XmlRootElement
 @NamedQueries({
   @NamedQuery(name = "ChapterPage.findAll", query = "SELECT c FROM ChapterPage c"),
@@ -57,7 +63,7 @@ public class ChapterPage implements Serializable {
   private String imageUrl;
   @JoinColumn(name = "ChapterId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
-  @XmlElement(required = true)
+  @XmlTransient
   private Chapter chapterId;
 
   public ChapterPage() {

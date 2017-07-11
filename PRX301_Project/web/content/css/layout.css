@@ -8,86 +8,95 @@ and open the template in the editor.
     Author     : User
 */
 *{
-    font-family: sans-serif;
-    margin: 0px;
-    padding: 0px;
+  font-family: sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+.banner {
+  background: linear-gradient(to right, rgba(34, 34, 34, 0.5), rgba(34, 34, 34, 0.5));
+}
+
+.banner img {
+  opacity: 0.8;
 }
 
 .menu{
-    padding-left: 80px;
-    height: 50px;
-    background-color: #4A4A4A;
-    color: white;
+  padding-left: 80px;
+  height: 50px;
+  background-color: #4A4A4A;
+  color: white;
 }
 
 .fr-menu-logo{
-    float:left;
-    position: fixed;
-    left: -5px;
+  float:left;
+  position: fixed;
+  left: -5px;
+  z-index: 10;
 }
 
-.fr-menu{
-    float:left;
-    padding: 0px 45px 0px 5px;
-    width: 100px;
-    height: 47px;
-    line-height: 50px;
-    font-weight: 600;
-    font-size: 14px;
-    font-style: normal;
-    text-align: center;
-    color: #FFF;
-    cursor: pointer;
-    padding-bottom: 3px;
-    bottom: 3px;
+.fr-menu {
+  float:left;
+  margin-left: 25px;
+  width: 100px;
+  height: 47px;
+  line-height: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  font-style: normal;
+  text-align: center;
+  color: #FFF;
+  cursor: pointer;
+  padding-bottom: 3px;
+  bottom: 3px;
 }
 
-
-.fr-menu a{
-    color: #FFF;
-    text-decoration: none;
+.fr-menu a {
+  text-decoration: none;
+  color: #FFF;
 }
 
-.fr-menu a:hover{
-    color: #faaf2a;
+.fr-menu:hover a {
+  color: #faaf2a;
 }
+
 
 .fr-search{
-    float: right;
-    line-height: 50px;
-    margin-right: 100px;
+  float: right;
+  line-height: 50px;
+  margin-right: 100px;
 }
 
 input[type=search]{
-    width: 30px;
-    height: 30px;
-    border: none;
-    padding-left: 30px;
-    background: url(../img/searchIcon.png) #ededed no-repeat 0px center;
-    transition: all .5s
+  width: 30px;
+  height: 30px;
+  border: none;
+  padding-left: 30px;
+  background: url(../img/searchIcon.png) #ededed no-repeat 0px center;
+  transition: all .5s
 }
 input[type=search]:focus{
-    padding-left: 35px;
-    width: 130px;
+  padding-left: 35px;
+  width: 130px;
 }
 
 .searchLogo{
-    margin-top: 85%;
+  margin-top: 85%;
 }
 
 .copyRightFormat{
-    height: 30px;
-    background-color: #4A4A4A;
-    color: #FFF;
-    line-height: 190%;
-    text-align: center;
-    position: relative;
-    padding: 7px;
+  height: 30px;
+  background-color: #4A4A4A;
+  color: #FFF;
+  line-height: 190%;
+  text-align: center;
+  position: relative;
+  padding: 7px;
 }
 
 
 .copyRight{
-    border-bottom: solid 1px #777777;
-    font-size: 14px;
+  border-bottom: solid 1px #777777;
+  font-size: 14px;
 }
 

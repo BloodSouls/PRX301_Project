@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -81,6 +82,7 @@ public class Chapter implements Serializable {
   private Date releasedDate;
   @XmlTransient
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "chapterId")
+  @OrderBy("pageNumber ASC")
   private List<ChapterPage> chapterPageList;
   @JoinColumn(name = "BookId", referencedColumnName = "Id")
   @ManyToOne(optional = false)

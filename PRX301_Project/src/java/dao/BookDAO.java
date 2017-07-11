@@ -44,14 +44,46 @@ public class BookDAO {
     return book.getId();
   }
 
-  public static List<Book> getTop10MostViewedBook() {
+  public static List<Book> searchBookByName(String name, int quantity, int pageNum) {
+    if (pageNum < 0) {
+      pageNum = 0;
+    }
+    if (quantity < 0) {
+      quantity = 0;
+    }
+    EntityManager em = Ultilities.getEntityManager();
+    List<Book> books = null;
+
+    try {
+      TypedQuery<Book> query = em.createQuery(
+              "SELECT b FROM Book b WHERE b.name LIKE :name",
+              Book.class)
+              .setFirstResult(pageNum * quantity)
+              .setMaxResults(quantity);
+      query.setParameter("name", "%" + name + "%");
+      books = query.getResultList();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return books;
+  }
+
+  public static List<Book> getMostViewedBooks(int quantity, int pageNum) { // first page is 0
+    if (pageNum < 0) {
+      pageNum = 0;
+    }
+    if (quantity < 0) {
+      quantity = 0;
+    }
     EntityManager em = Ultilities.getEntityManager();
     List<Book> result = null;
 
     try {
       TypedQuery<Book> query = em.createQuery(
               "SELECT b FROM Book b ORDER BY b.totalView DESC", Book.class)
-              .setMaxResults(10);
+              .setFirstResult(pageNum * quantity)
+              .setMaxResults(quantity);
       result = query.getResultList();
     } catch (Exception e) {
       e.printStackTrace();
@@ -62,14 +94,21 @@ public class BookDAO {
     return result;
   }
 
-  public static List<Book> get10NewBook() {
+  public static List<Book> getNewBook(int quantity, int pageNum) {
+    if (pageNum < 0) {
+      pageNum = 0;
+    }
+    if (quantity < 0) {
+      quantity = 0;
+    }
     EntityManager em = Ultilities.getEntityManager();
     List<Book> result = null;
 
     try {
       TypedQuery<Book> query = em.createQuery(
               "SELECT b FROM Book b ORDER BY b.creatingDate DESC", Book.class)
-              .setMaxResults(10);
+              .setFirstResult(pageNum * quantity)
+              .setMaxResults(quantity);
 
       result = query.getResultList();
     } catch (Exception e) {
@@ -81,7 +120,13 @@ public class BookDAO {
     return result;
   }
 
-  public static List<Book> get10UpdatedBook() {
+  public static List<Book> getUpdatedBooks(int quantity, int pageNum) {
+    if (pageNum < 0) {
+      pageNum = 0;
+    }
+    if (quantity < 0) {
+      quantity = 0;
+    }
     EntityManager em = Ultilities.getEntityManager();
     List<Book> result = null;
 
@@ -92,7 +137,8 @@ public class BookDAO {
               + " FROM Chapter c"
               + " GROUP BY c.bookId"
               + " ORDER BY MAX(c.releasedDate) DESC", Object[].class)
-              .setMaxResults(10);
+              .setFirstResult(pageNum * quantity)
+              .setMaxResults(quantity);
 
       List<Object[]> list = query.getResultList();
       result = new ArrayList<Book>();

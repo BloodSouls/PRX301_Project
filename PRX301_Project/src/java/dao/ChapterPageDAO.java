@@ -1,5 +1,6 @@
 package dao;
 
+import entities.Chapter;
 import entities.ChapterPage;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -8,7 +9,7 @@ import ultis.Ultilities;
 
 public class ChapterPageDAO {
 
-  public static ChapterPage getChapterPageById(int id) {
+  public static ChapterPage getChapterPage(int id) {
     EntityManager em = Ultilities.getEntityManager();
     ChapterPage cp = null;
 
@@ -35,7 +36,7 @@ public class ChapterPageDAO {
       TypedQuery<ChapterPage> query = em.createQuery(
               "SELECT c FROM ChapterPage c WHERE c.chapterId = :chapterId",
               ChapterPage.class);
-      query.setParameter("chapterId", chapterId);
+      query.setParameter("chapterId", new Chapter(chapterId));
 
       result = query.getResultList();
     } catch (Exception e) {

@@ -1,5 +1,6 @@
 package dao;
 
+import entities.Book;
 import entities.Chapter;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -8,7 +9,7 @@ import ultis.Ultilities;
 
 public class ChapterDAO {
   
-  public static Chapter getChapterById(int id) {
+  public static Chapter getChapter(int id) {
     EntityManager em = Ultilities.getEntityManager();
     Chapter chapter = null;
 
@@ -31,9 +32,9 @@ public class ChapterDAO {
 
     try {
       TypedQuery<Chapter> query = em.createQuery(
-              "SELECT c FROM Chapter c WHERE c.bookId = :bookId",
+              "SELECT c FROM Chapter c WHERE c.bookId = :bookId ORDER BY c.number",
               Chapter.class);
-      query.setParameter("bookId", bookId);
+      query.setParameter("bookId", new Book(bookId));
       
       result = query.getResultList();
     } catch (Exception e) {
