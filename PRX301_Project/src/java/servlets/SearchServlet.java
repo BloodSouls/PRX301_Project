@@ -6,11 +6,14 @@
 package servlets;
 
 import dao.BookDAO;
+import dao.GenreDAO;
 import entities.Book;
 import entities.Books;
+import entities.Genre;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,15 +49,17 @@ public class SearchServlet extends HttpServlet {
     String searchValue = request.getParameter("value");
     String type = request.getParameter("type");
     String page = request.getParameter("page");
-    
+    String genreValue = request.getParameter("genreValue");
+
     String resultMessage = "";
-    
+
     int pageNum = 0;
     if (page != null && page.matches("\\d+")) {
       pageNum = Integer.parseInt(page);
     }
-    
+
     try {
+      List<Integer> genreIdList = null;
       List<Book> list = null;
       if (type != null) {
         type = type.toLowerCase();
@@ -71,24 +76,50 @@ public class SearchServlet extends HttpServlet {
             list = BookDAO.getUpdatedBooks(bookQuantity, pageNum);
             resultMessage = "MỚI CẬP NHẬT";
             break;
+          case "genre":
+            genreIdList = Ultilities.parseStringToIntList(genreValue);
+            if (genreIdList != null) {
+              list = BookDAO.getBookByGenreIds(genreIdList);
+              resultMessage = "THỂ LOẠI:";
+              List<Genre> genreList = GenreDAO.getGenreByIdList(genreIdList);
+              for (int i = 0; i < genreList.size(); ++i) {
+                resultMessage += " " + genreList.get(i).getName();
+                if (i != genreList.size() - 1) {
+                  resultMessage += ",";
+                }
+              }
+            }
+            break;
+          case "filter":
+            searchValue = searchValue == null ? "" : searchValue;
+            genreIdList = Ultilities.parseStringToIntList(genreValue);
+            if (genreIdList != null) {
+              list = BookDAO.searchBookByNameAndGenreList(searchValue,
+                      genreIdList, bookQuantity, pageNum);
+            } else {
+              list = BookDAO.searchBookByName(searchValue, bookQuantity, pageNum);
+            }
+            resultMessage = "DANH SÁCH TRUYỆN:";
+            
+            break;
           default:
         }
-      }
-      
-      if (searchValue != null) {
+      } else if (searchValue != null) {
         searchValue = searchValue.trim();
         list = BookDAO.searchBookByName(searchValue, bookQuantity, pageNum);
         resultMessage = "TÌM KIẾM: " + searchValue;
       }
-      
+
       if (list == null) {
         list = new ArrayList<>();
       }
-      
+
+      List<Genre> genreList = GenreDAO.getAllGenre();
       String xmlString = Ultilities.marshalBooksToString(new Books(list));
-      
+
       request.setAttribute("BOOK_LIST", xmlString);
       request.setAttribute("TITLE", resultMessage);
+      request.setAttribute("GENRE_LIST", genreList);
     } finally {
       RequestDispatcher rd = request.getRequestDispatcher(searchPage);
       rd.forward(request, response);

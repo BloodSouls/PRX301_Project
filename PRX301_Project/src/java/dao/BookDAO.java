@@ -1,7 +1,9 @@
 package dao;
 
 import entities.Book;
+import entities.Genre;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -18,6 +20,28 @@ public class BookDAO {
       query.setParameter("id", bookId);
       book = query.getSingleResult();
     } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      em.close();
+    }
+
+    return book;
+  }
+  
+  public static Book getBookAndIncreaseView(int bookId) {
+    EntityManager em = Ultilities.getEntityManager();
+    Book book = null;
+
+    try {
+      TypedQuery<Book> query = em.createNamedQuery("Book.findById", Book.class);
+      query.setParameter("id", bookId);
+      book = query.getSingleResult();
+      
+      em.getTransaction().begin();
+      book.setTotalView(book.getTotalView() + 1);
+      em.getTransaction().commit();
+    } catch (Exception e) {
+      em.getTransaction().rollback();
       e.printStackTrace();
     } finally {
       em.close();
@@ -68,6 +92,33 @@ public class BookDAO {
 
     return books;
   }
+  
+  public static List<Book> searchBookByNameAndGenreList(String name,
+          List<Integer> genreList, int quantity, int pageNum) {
+    EntityManager em = Ultilities.getEntityManager();
+    List<Book> result = null;
+    
+    try {
+      TypedQuery<Book> query = em.createQuery(
+              "SELECT DISTINCT m.bookId"
+              + " FROM BookGenreMapping m"
+              + " WHERE m.genreId IN :genreList"
+                + " AND m.bookId.name LIKE :name",
+              Book.class)
+              .setFirstResult(quantity * pageNum)
+              .setMaxResults(quantity);
+      query.setParameter("name", "%" + name + "%");
+      query.setParameter("genreList", genreList);
+      
+      result = query.getResultList();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      em.close();
+    }
+    
+    return result;
+  }
 
   public static List<Book> getMostViewedBooks(int quantity, int pageNum) { // first page is 0
     if (pageNum < 0) {
@@ -91,6 +142,26 @@ public class BookDAO {
       em.close();
     }
 
+    return result;
+  }
+  
+  public static List<Book> getBookByGenreIds(List<Integer> idList) {
+    EntityManager em = Ultilities.getEntityManager();
+    List<Book> result = null;
+    
+    try {
+      TypedQuery<Book> query = em.createQuery(
+              "SELECT DISTINCT m.bookId"
+              + " FROM BookGenreMapping m"
+              + " WHERE m.genreId IN :idList",
+              Book.class);
+      query.setParameter("idList", idList);
+      
+      result = query.getResultList();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
     return result;
   }
 

@@ -47,7 +47,7 @@ public class BookDetailServlet extends HttpServlet {
     try {
       if (strBookId.matches("\\d+")) {
         int bookId = Integer.parseInt(strBookId);
-        Book book = BookDAO.getBook(bookId);
+        Book book = BookDAO.getBookAndIncreaseView(bookId);
         
         request.setAttribute("BOOK", book);
         request.setAttribute("BOOKSTATUS", Enums.BookStatus.values());

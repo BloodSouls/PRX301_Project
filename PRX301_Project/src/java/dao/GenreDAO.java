@@ -27,6 +27,42 @@ public class GenreDAO {
     return genre;
   }
   
+  public static List<Genre> getGenreByIdList(List<Integer> idList) {
+    EntityManager em = Ultilities.getEntityManager();
+    List<Genre> result = null;
+    try {
+      TypedQuery<Genre> query = em.createQuery(
+              "SELECT g FROM Genre g WHERE g.id IN :idList",
+              Genre.class);
+      query.setParameter("idList", idList);
+      
+      result = query.getResultList();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+    return result;
+  }
+  
+  public static List<Genre> getAllGenre() {
+    EntityManager em = Ultilities.getEntityManager();
+    List<Genre> result = null;
+    
+    try {
+      TypedQuery<Genre> query = em.createQuery(
+              "SELECT g FROM Genre g",
+              Genre.class);
+      result = query.getResultList();
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      em.close();
+    }
+    
+    return result;
+  }
+  
   public static Genre getGenreByName(String name) {
     EntityManager em = Ultilities.getEntityManager();
     Genre genre = null;

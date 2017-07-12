@@ -97,7 +97,7 @@
                 <c:if test="${not empty book.bookGenreMappingList}">
                 <li class="info-child"><b>Thể loại: </b>
                   <c:forEach var="mapping" items="${book.bookGenreMappingList}" varStatus="loop">
-                    - <a href="#">${mapping.genreId.name}</a>
+                    - <a href="DispatchServlet?btnAction=search&type=genre&genreValue=${mapping.genreId.id}">${mapping.genreId.name}</a>
                     <c:if test="${loop.last}"> -</c:if>
                   </c:forEach>
                 </li>

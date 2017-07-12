@@ -47,11 +47,15 @@ and open the template in the editor.
   color: #A2A2A2;
 }
 
+.update-list {
+  margin-top: 10px;
+}
+
 .update-item{
   float: left;
-  width: 159px;
-  height: 240px;
-  margin: 2% 4% 2% 0%;
+  width: 20%;
+  min-height: 270px;
+  margin-top: 5px;
   text-decoration: none;
   color: black;
   text-align: center;
@@ -59,7 +63,7 @@ and open the template in the editor.
 }
 
 .update-item img{
-  width: 159px;
+  width: 160px;
   height: 200px;
 }
 
@@ -76,11 +80,9 @@ and open the template in the editor.
 }
 
 .search-filter {
-  height: 200px;
-  margin-right: 6%;
-}
-.search-filter div{
-  margin: 0% 0% 5% 9%;
+  min-height: 200px;
+  margin: 0% 0% 5% 5%;
+  display: inline-block;
 }
 
 .search-title span {
@@ -91,15 +93,32 @@ and open the template in the editor.
   line-height: 111px;
 }
 
-.search-filter label{
-  float: left;
-  margin: 3% 0% 0% 10%;
-  display: -webkit-inline-box;
+.genre-list {
+  width: 100%;
+  padding-left: 10px;
+  margin: 5px 0px 20px;
 }
+
+.genre-list .genre {
+  width: 25%;
+  float: left;
+  display: block;
+  margin-top: 5px;
+}
+
+.genre-list .genre input {
+  cursor: pointer;
+  float: left;
+}
+
+.genre-list .genre .name {
+  margin-left: 20px;
+}
+
 
 .popup{
   background-color: whitesmoke;
-  max-width: 500px;
+  /*max-width: 500px;*/
   min-height: 250px;
   display: inline-block;
   left: 50%;
@@ -110,17 +129,11 @@ and open the template in the editor.
   top: 40%;
   visibility: hidden;
   z-index: 10;
-
-
   transform: translate(-50%, -50%);
-
   border-radius: 10px;
-
-
   box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.4) inset;
-
-
   transition: opacity .5s, top .5s;
+  min-width: 500px;
 }
 .overlay {
   background-color: rgba(0, 0, 0, 0.6);
@@ -161,7 +174,7 @@ and open the template in the editor.
 }
 
 .search-fill{
-  margin: 5% 0% 5% 8%;
+  margin: 5% 0% 5% 5%;
 }
 
 .search-fill span,

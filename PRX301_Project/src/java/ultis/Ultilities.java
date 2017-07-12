@@ -19,7 +19,10 @@ import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
@@ -46,20 +49,20 @@ public class Ultilities implements Serializable {
   public static EntityManager getEntityManager() {
     return emf.createEntityManager();
   }
-  
+
   public static String marshalBooksToString(Books books) {
     try {
       JAXBContext jc = JAXBContext.newInstance(Books.class);
       Marshaller mar = jc.createMarshaller();
-      
+
       StringWriter sw = new StringWriter();
       mar.marshal(books, sw);
-      
+
       return sw.toString();
     } catch (JAXBException e) {
       e.printStackTrace();
     }
-    
+
     return null;
   }
 
@@ -128,7 +131,7 @@ public class Ultilities implements Serializable {
       String extension = uri.substring(uri.lastIndexOf(".") + 1);
       filePath = folderPath + "\\" + fileName + "." + extension;
       filePath = covertStringToURL(filePath);
-      
+
       URL url = new URL(uri);
       BufferedImage img = ImageIO.read(url);
       File file = new File(realPath + filePath);
@@ -155,6 +158,35 @@ public class Ultilities implements Serializable {
       e.printStackTrace();
     }
     return "";
+  }
+
+  public static List<Integer> parseStringToIntList(String str) {
+    List<Integer> result = null;
+
+    try {
+      int[] arr = null;
+      if (str.matches("\\d+")) {
+        arr = new int[1];
+        arr[0] = Integer.parseInt(str);
+      } else if (str.matches("^\\[.*\\]$")) {
+        arr = Arrays.stream(str.substring(1, str.length() - 1).split(","))
+                .map(String::trim).mapToInt(Integer::parseInt).toArray();
+      } else if (str.matches("^(\\d+,[ ]*)+\\d+$")) {
+        arr = Arrays.stream(str.split(",")).map(String::trim)
+                .mapToInt(Integer::parseInt).toArray();
+      }
+
+      if (arr != null) {
+        result = new ArrayList<>();
+        for (int i : arr) {
+          result.add(i);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return result;
   }
 
 }

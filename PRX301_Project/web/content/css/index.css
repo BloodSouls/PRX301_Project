@@ -31,7 +31,7 @@ and open the template in the editor.
   margin-right: 3%;
   background-color: #82C242;
   height: 50px;
-  margin-top: 21px;
+  margin-top: 25px;
   width: 300px;
   text-align: center;
   cursor: pointer;
@@ -60,7 +60,7 @@ and open the template in the editor.
   line-height: 51px;
   background-color: #FF9E4B;
   height: 50px;
-  margin-top: 21px;
+  margin-top: 25px;
   width: 300px;
   text-align: center;
   cursor: pointer;
@@ -119,11 +119,15 @@ and open the template in the editor.
   color: #A2A2A2;
 }
 
+.update-list {
+  margin-top: 10px;
+}
+
 .update-item {
   float: left;
-  width: 159px;
-  height: 240px;
-  margin: 2% 4% 2% 0%;
+  width: 20%;
+  min-height: 270px;
+  margin-top: 5px;
   text-decoration: none;
   color: black;
   text-align: center;
@@ -131,7 +135,7 @@ and open the template in the editor.
 }
 
 .update-item img {
-  width: 159px;
+  width: 160px;
   height: 200px;
 }
 
