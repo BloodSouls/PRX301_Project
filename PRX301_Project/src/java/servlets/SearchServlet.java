@@ -13,15 +13,13 @@ import entities.Genre;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
+import ultis.Const;
 import ultis.Ultilities;
 
 /**
@@ -45,14 +43,12 @@ public class SearchServlet extends HttpServlet {
           throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-    int bookQuantity = 25;
     String searchValue = request.getParameter("value");
     String type = request.getParameter("type");
     String page = request.getParameter("page");
     String genreValue = request.getParameter("genreValue");
 
     String resultMessage = "";
-
     int pageNum = 0;
     if (page != null && page.matches("\\d+")) {
       pageNum = Integer.parseInt(page);
@@ -65,21 +61,21 @@ public class SearchServlet extends HttpServlet {
         type = type.toLowerCase();
         switch (type) {
           case "mostview":
-            list = BookDAO.getMostViewedBooks(bookQuantity, pageNum);
+            list = BookDAO.getMostViewedBooks(Const.BOOK_QUANTITY_SEARCH_PAGE, pageNum);
             resultMessage = "PHỔ BIẾN";
             break;
           case "new":
-            list = BookDAO.getNewBook(bookQuantity, pageNum);
+            list = BookDAO.getNewBook(Const.BOOK_QUANTITY_SEARCH_PAGE, pageNum);
             resultMessage = "MỚI RA MẮT";
             break;
           case "update":
-            list = BookDAO.getUpdatedBooks(bookQuantity, pageNum);
+            list = BookDAO.getUpdatedBooks(Const.BOOK_QUANTITY_SEARCH_PAGE, pageNum);
             resultMessage = "MỚI CẬP NHẬT";
             break;
           case "genre":
             genreIdList = Ultilities.parseStringToIntList(genreValue);
             if (genreIdList != null) {
-              list = BookDAO.getBookByGenreIds(genreIdList);
+              list = BookDAO.getBookByGenreIds(genreIdList, Const.BOOK_QUANTITY_SEARCH_PAGE, pageNum);
               resultMessage = "THỂ LOẠI:";
               List<Genre> genreList = GenreDAO.getGenreByIdList(genreIdList);
               for (int i = 0; i < genreList.size(); ++i) {
@@ -95,9 +91,10 @@ public class SearchServlet extends HttpServlet {
             genreIdList = Ultilities.parseStringToIntList(genreValue);
             if (genreIdList != null) {
               list = BookDAO.searchBookByNameAndGenreList(searchValue,
-                      genreIdList, bookQuantity, pageNum);
+                      genreIdList, Const.BOOK_QUANTITY_SEARCH_PAGE, pageNum);
+              System.out.println(pageNum);
             } else {
-              list = BookDAO.searchBookByName(searchValue, bookQuantity, pageNum);
+              list = BookDAO.searchBookByName(searchValue, Const.BOOK_QUANTITY_SEARCH_PAGE, pageNum);
             }
             resultMessage = "DANH SÁCH TRUYỆN:";
             
@@ -106,7 +103,7 @@ public class SearchServlet extends HttpServlet {
         }
       } else if (searchValue != null) {
         searchValue = searchValue.trim();
-        list = BookDAO.searchBookByName(searchValue, bookQuantity, pageNum);
+        list = BookDAO.searchBookByName(searchValue, Const.BOOK_QUANTITY_SEARCH_PAGE, pageNum);
         resultMessage = "TÌM KIẾM: " + searchValue;
       }
 

@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ultis.Const;
 import ultis.Ultilities;
 
 /**
@@ -40,9 +41,9 @@ public class MainPageServlet extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     try {
-      List<Book> newBooks = BookDAO.getNewBook(10, 0);
-      List<Book> updatedBooks = BookDAO.getUpdatedBooks(10, 0);
-      List<Book> mostViewedBooks = BookDAO.getMostViewedBooks(10, 0);
+      List<Book> newBooks = BookDAO.getNewBook(Const.BOOK_QUANTITY_MAIN_PAGE, 0);
+      List<Book> updatedBooks = BookDAO.getUpdatedBooks(Const.BOOK_QUANTITY_MAIN_PAGE, 0);
+      List<Book> mostViewedBooks = BookDAO.getMostViewedBooks(Const.BOOK_QUANTITY_MAIN_PAGE, 0);
       
       int num;
       Random r = new Random();

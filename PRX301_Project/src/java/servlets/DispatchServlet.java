@@ -47,7 +47,7 @@ public class DispatchServlet extends HttpServlet {
     String action = request.getParameter("btnAction");
     String url = "";
 
-//    Ultilities.crawlAndSaveDataToDB(1, 1);
+//    Ultilities.crawlAndSaveDataToDB(2, 2);
     try {
       if (action == null) {
         url = mainPageServlet;

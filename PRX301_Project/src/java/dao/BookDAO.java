@@ -145,7 +145,8 @@ public class BookDAO {
     return result;
   }
   
-  public static List<Book> getBookByGenreIds(List<Integer> idList) {
+  public static List<Book> getBookByGenreIds(List<Integer> idList,
+          int bookQuantity, int pageNum) {
     EntityManager em = Ultilities.getEntityManager();
     List<Book> result = null;
     
@@ -154,7 +155,9 @@ public class BookDAO {
               "SELECT DISTINCT m.bookId"
               + " FROM BookGenreMapping m"
               + " WHERE m.genreId IN :idList",
-              Book.class);
+              Book.class)
+              .setFirstResult(pageNum * bookQuantity)
+              .setMaxResults(bookQuantity);
       query.setParameter("idList", idList);
       
       result = query.getResultList();
